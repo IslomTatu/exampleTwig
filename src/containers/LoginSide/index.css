@@ -1,0 +1,47 @@
+#login-side{
+    /*border: 1px solid grey;*/
+    width: 25%;
+    height: auto;
+    margin: 10px;
+    background-color: #fff;
+    position: sticky;
+    top: 65px;
+    border-radius: 10px;
+    outline: 0;
+}
+#container-login{
+    padding: 5px;
+
+    border-radius: 10px;
+}
+#form-container{
+    padding: 10px;
+    text-align: center;
+    line-height: 20px;
+
+    border-radius: 10px;
+}
+
+.input-group{
+    line-height: 25px;
+}
+
+#submit-container{
+    margin-top: 20px;
+
+    border-radius: 10px;
+}
+
+#via-container{
+    text-align: center;
+    margin-top: 20px;
+
+    border-radius: 10px;
+}
+
+#register-container{
+    text-align: center;
+    margin-top: 20px;
+
+    border-radius: 10px;
+}

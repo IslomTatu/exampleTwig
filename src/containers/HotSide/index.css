@@ -1,0 +1,8 @@
+#hot-side{
+    border: 1px solid grey;
+    width: 25%;
+    height: 1000px;
+    margin: 10px;
+    position: sticky;
+    top: 55px;
+}

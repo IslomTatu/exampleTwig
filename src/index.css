@@ -1,0 +1,48 @@
+*, body{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+body{
+    background-color: #dee1e3;
+}
+#container{
+    width: 100%;
+    border: 2px solid red;
+    position: relative;
+    padding: 2px;
+    margin: 0 auto;
+}
+
+#container-inner{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    border: 2px solid black;
+    margin: 0 auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*media-queries-------------------------------------------------------------*/
+@media only screen and (min-width: 1450px){
+
+    #container-inner{
+        width: 1300px;
+    }
+
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "id": 0,
+    "user": "John Doe",
+    "date":"10-06-2018",
+    "type":"img",
+    "img":"https://raw.githubusercontent.com/zalmoxisus/atom-redux-devtools/master/demo.png",
+    "seen":"98",
+    "comments-count":"2",
+    "comments":[],
+    "like":4,
+    "unlike":2,
+    "userImg": "http://www.concordrusam.com/wp-content/uploads/2017/10/pro.jpg"
+
+  },
+  {
+    "id": 1,
+    "user": "Michael Jackson",
+    "date":"09-06-2018",
+    "type":"img",
+    "img":"https://user-images.githubusercontent.com/3001525/29451479-6621bf1a-83c8-11e7-8ebb-b4e98b1af91c.png",
+    "seen":"100",
+    "comments-count":"5",
+    "comments":[],
+    "like":10,
+    "unlike":0,
+    "userImg" : "https://www.thefamouspeople.com/profiles/images/michael-jackson-3.jpg"
+  },
+  {
+    "id": 2,
+    "user": "React developers",
+    "date":"11-06-2018",
+    "type":"img",
+    "img":"https://cdn-images-1.medium.com/max/900/1*G2QwxPF2TvWXzRUnA4axoA.png",
+    "seen":"50",
+    "comments-count":"3",
+    "comments":[],
+    "like":15,
+    "unlike":1,
+    "userImg": "https://androidfilehost.com/images/avatars/23329332407578592.png"
+  }
+]
