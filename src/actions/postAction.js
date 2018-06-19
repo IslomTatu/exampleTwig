@@ -42,10 +42,10 @@ export const unlikePost = (id) => ({
     id
 })
 
-export const fetchMoreData = data => dispatch => {
-    dispatch({
+export const fetchMoreData = data  => ({
+
         type: FETCH_MORE_DATA,
         data
-    })
 
-}
+
+})

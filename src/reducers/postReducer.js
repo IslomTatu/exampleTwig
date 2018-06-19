@@ -40,6 +40,11 @@ const postReducer = (state = initialState, action) => {
             }
             break
 
+        case FETCH_MORE_DATA:
+
+            console.log("state in fetchMore", state)
+            console.log("data in action data", action.data)
+
         default:
             return state
     }

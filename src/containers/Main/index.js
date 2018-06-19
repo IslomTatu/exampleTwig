@@ -22,11 +22,9 @@ class Main extends Component{
 
     componentWillMount(){
         this.props.fetchPosts()
+
     }
     fetchMoreData = () => {
-
-        this.props.fetchMoreData()
-
         // setTimeout(() => {
         //     this.setState({
         //         begin: this.state.begin + 2,
@@ -35,6 +33,11 @@ class Main extends Component{
         //     });
         // }, 500)
     }
+
+    componentDidMount(){
+        this.props.fetchMoreData(this.props.posts)
+    }
+
 
 
 
