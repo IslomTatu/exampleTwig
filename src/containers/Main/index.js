@@ -14,11 +14,6 @@ import './index.css'
 
 class Main extends Component{
 
-    state = {
-        begin: 0,
-        end: 2,
-        posts: this.props.posts.slice(0, 5)
-    }
 
     componentWillMount(){
         this.props.fetchPosts()
@@ -40,14 +35,16 @@ class Main extends Component{
 
 
 
-
     render(){
 
-
+        getPostDate = (date) => {
+            const d = new Date(date)
+            return d.getDate()
+        }
         return (
             <div id="main">
                 <InfiniteScroll
-                    dataLength={this.state.posts.length}
+                    dataLength={this.props.posts.length}
                     next={this.fetchMoreData}
                     hasMore={true}
                     loader={<h1>Loading...</h1>}
@@ -55,7 +52,7 @@ class Main extends Component{
                 >
                 {this.props.posts.map((post, index) => (
                         <div key={index} className="posts-container" id={"post__"+index}>
-                            <h1>{post.title}</h1>
+                            <h3>{post.title}</h3>
                             <div className='post-header'>
                                 <div className='user-img-container'>
                                     <img className='user-img' src={"http://keenthemes.com/preview/metronic/theme/assets/pages/media/profile/profile_user.jpg"} alt="user"/>
@@ -63,7 +60,7 @@ class Main extends Component{
                                 </div>
                                 <div className='user-data'>
                                     <p>{post.user.username}</p>
-                                    <p>{post.date}</p>
+                                    <p>{this.getPostDate(this.post.date)}</p>
                                 </div>
                             </div>
 

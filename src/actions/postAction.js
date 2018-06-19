@@ -43,9 +43,7 @@ export const unlikePost = (id) => ({
 })
 
 export const fetchMoreData = data  => ({
-
         type: FETCH_MORE_DATA,
         data
-
 
 })
