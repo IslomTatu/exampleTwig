@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { connect } from 'react-redux'
 import {dataPosts, fetchMoreData, fetchPosts, likePost, unlikePost} from "../../actions/postAction";
+import { bindActionCreators } from 'redux'
 
 import Icon from 'react-icons-kit'
 import {comment} from 'react-icons-kit/fa/comment'
@@ -14,43 +15,49 @@ import './index.css'
 
 class Main extends Component{
 
-
+    state = {
+        items: this.props.news.slice(0,3),
+        begin: 3,
+        end: 6
+    }
     componentWillMount(){
         this.props.fetchPosts()
+        setTimeout(()=>{
+            this.setState({
+                items: this.props.news.slice(0,3)
+            })
+        },1500)
 
     }
     fetchMoreData = () => {
-        // setTimeout(() => {
-        //     this.setState({
-        //         begin: this.state.begin + 2,
-        //         end: this.state.end + 2,
-        //         posts: this.state.posts.concat(this.props.posts.slice(6, 16))
-        //     });
-        // }, 500)
-    }
 
-    componentDidMount(){
-        this.props.fetchMoreData(this.props.posts)
-    }
+        let begin = this.state.begin
+        let end = this.state.end
+        let items = this.state.items
+        setTimeout(() => {
+            this.setState({
+                items: items.concat(this.props.news.slice(this.state.begin, this.state.end)),
+                begin: begin + 3,
+                end: end + 3
+            });
+        }, 500)
 
+    }
 
 
     render(){
 
-        getPostDate = (date) => {
-            const d = new Date(date)
-            return d.getDate()
-        }
         return (
             <div id="main">
                 <InfiniteScroll
-                    dataLength={this.props.posts.length}
+                    dataLength={this.state.items.length}
                     next={this.fetchMoreData}
                     hasMore={true}
-                    loader={<h1>Loading...</h1>}
+
+
 
                 >
-                {this.props.posts.map((post, index) => (
+                {this.state.items.map((post, index) => (
                         <div key={index} className="posts-container" id={"post__"+index}>
                             <h3>{post.title}</h3>
                             <div className='post-header'>
@@ -60,7 +67,7 @@ class Main extends Component{
                                 </div>
                                 <div className='user-data'>
                                     <p>{post.user.username}</p>
-                                    <p>{this.getPostDate(this.post.date)}</p>
+                                    <p>{post.date}</p>
                                 </div>
                             </div>
 
@@ -105,14 +112,17 @@ class Main extends Component{
 
 
 const mapStateToProps = state => ({
-    posts: state.news.items
+    news: state.news.items
+
 })
 
-// const mapDispatchToProps = dispatch => ({
-//     likePost: id => dispatch(likePost(id)),
-//     unlikePost: id => dispatch(unlikePost(id)),
-//     dataPosts:() => dispatch(dataPosts())
-// })
+const mapDispatchToProps = dispatch => bindActionCreators ({
+    fetchPosts,
+    fetchMoreData
+    // likePost: id => dispatch(likePost(id)),
+    // unlikePost: id => dispatch(unlikePost(id)),
+    // dataPosts:() => dispatch(dataPosts())
+}, dispatch)
 
 
-export default connect(mapStateToProps, {fetchPosts, fetchMoreData} )(Main)
+export default connect(mapStateToProps, mapDispatchToProps )(Main)

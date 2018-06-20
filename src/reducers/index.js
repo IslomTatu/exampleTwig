@@ -1,7 +1,11 @@
 import { combineReducers } from "redux"
-import postReducer from "./postReducer";
+import { routerReducer } from 'react-router-redux'
+import postReducer from "./fetchPosts"
+import sendData from './sendData'
 
 
 export default combineReducers({
-    news: postReducer
+    routing: routerReducer,
+    news: postReducer,
+    posts: sendData
 })
