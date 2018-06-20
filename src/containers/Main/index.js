@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { connect } from 'react-redux'
 import {dataPosts, fetchMoreData, fetchPosts, likePost, unlikePost} from "../../actions/postAction";
@@ -16,11 +17,12 @@ import './index.css'
 class Main extends Component{
 
     state = {
-        items: this.props.news.slice(0,3),
+        items: [],
         begin: 3,
         end: 6
     }
-    componentWillMount(){
+    componentDidMount(){
+
         this.props.fetchPosts()
         setTimeout(()=>{
             this.setState({
@@ -59,7 +61,7 @@ class Main extends Component{
                 >
                 {this.state.items.map((post, index) => (
                         <div key={index} className="posts-container" id={"post__"+index}>
-                            <h3>{post.title}</h3>
+                            <h3><Link to={'/post'}>{post.title}</Link></h3>
                             <div className='post-header'>
                                 <div className='user-img-container'>
                                     <img className='user-img' src={"http://keenthemes.com/preview/metronic/theme/assets/pages/media/profile/profile_user.jpg"} alt="user"/>
