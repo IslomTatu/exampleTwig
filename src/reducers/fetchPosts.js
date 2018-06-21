@@ -1,4 +1,4 @@
-import {DATA_POSTS, FETCH_POSTS, NEW_POST, LIKE_POSTS, UNLIKE_POSTS, FETCH_MORE_DATA} from "../constants";
+import {DATA_POSTS, FETCH_POSTS, NEW_POST, LIKE_POSTS, UNLIKE_POSTS, FETCH_MORE_DATA, GET_POST_ID} from "../constants";
 
 const initialState = {
     items: [],
@@ -19,6 +19,11 @@ const postReducer = (state = initialState, action) => {
                 items: action.payload
             }
             break
+        case GET_POST_ID:
+            return {
+                ...state,
+                item: action.payload
+            }
         case LIKE_POSTS:
 
             return {
