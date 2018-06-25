@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux'
 import {getPostId} from "../../actions/postAction";
 
 import Button from '../../components/Button'
-
+import './index.css'
 
 class Post extends Component{
 

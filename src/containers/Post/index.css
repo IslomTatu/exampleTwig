@@ -1,0 +1,25 @@
+#container-post{
+    margin: 5px 10px 10px 10px;
+    background-color: transparent;
+
+}
+
+#main-post{
+    background-color: white;
+    width: 100%;
+    margin: 5px;
+    padding: 10px;
+
+    border: 1px solid black;
+
+}
+
+#main-comment{
+    background-color: white;
+    width: 100%;
+    height: 60px;
+    margin: 5px;
+    padding: 10px;
+
+    border: 1px solid black;
+}
