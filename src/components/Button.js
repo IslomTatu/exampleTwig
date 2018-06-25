@@ -8,12 +8,12 @@ const But = styled('button')`
   box-shadow: none;
   border: none;
   cursor: pointer;
-  background-color: #dee1e3;
+  background-color: ${props => props.color? props.color : '#dee1e3'};
   float: right;
 `
 
-const Button = ( {type, value} ) => (
-    <But type={type}>{value}</But>
+const Button = ( {type, value, color} ) => (
+    <But type={type} color={color}>{value}</But>
 )
 
 export default Button

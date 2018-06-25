@@ -5,6 +5,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "history": "^4.7.2",
+    "normalizr": "^3.2.4",
+    "prop-types": "^15.6.2",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-icons": "^2.2.7",

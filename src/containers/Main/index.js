@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { connect } from 'react-redux'
-import {dataPosts, fetchMoreData, fetchPosts, getPostId, likePost, unlikePost} from "../../actions/postAction";
+import {fetchPosts, getPostId, likePost, unlikePost} from "../../actions/postAction";
 import { bindActionCreators } from 'redux'
 
 import Icon from 'react-icons-kit'
@@ -61,7 +61,7 @@ class Main extends Component{
                 >
                 {this.state.items.map((post, index) => (
                         <div key={index} className="posts-container" id={"post__"+index} onClick={()=>this.props.getPostId(post.id)}>
-                            <h3><Link to="/post">{post.title}</Link></h3>
+                            <h3><Link to={"/test_"+post.id} >{post.title}</Link></h3>
                             <div className='post-header'>
                                 <div className='user-img-container'>
                                     <img className='user-img' src={"http://keenthemes.com/preview/metronic/theme/assets/pages/media/profile/profile_user.jpg"} alt="user"/>
@@ -120,7 +120,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators ({
     fetchPosts,
-    fetchMoreData,
     getPostId
     // likePost: id => dispatch(likePost(id)),
     // unlikePost: id => dispatch(unlikePost(id)),

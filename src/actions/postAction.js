@@ -1,38 +1,39 @@
-import { FETCH_POSTS,
-    NEW_POST,
-    DATA_POSTS,
+import { normalize } from 'normalizr'
+import { POSTS_FETCHED,
     LIKE_POSTS,
     UNLIKE_POSTS,
-    FETCH_MORE_DATA,
-    GET_POST_ID
+    POST_FETCHED
+
 } from "../constants";
-import posts from '../base/file.json'
+import api from './api'
+
 import axios from 'axios'
 
+const postsFetched = data => ({
+    type: POSTS_FETCHED,
+    data
+})
+
+const postFetched = data => ({
+    type: POST_FETCHED,
+    data
+})
 
 export const  fetchPosts = () => dispatch  => {
-    // fetch('https://twig.uz/v1.0/api/posts')
-    //     .then(res => res.json())
-    //     .then(posts => dispatch({
-    //         type: FETCH_POSTS,
-    //         payload: posts.results
-    //     }))
 
-    axios.get('https://twig.uz/v1.0/api/posts/')
-        .then(response => dispatch({
-            type: FETCH_POSTS,
-            payload: response.data.results
-        }))
-        // .then(res => dispatch({
-        //     type: FETCH_POSTS,
-        //     payload: res.data.results
-        // }))
+    api.posts
+        .fetchAll()
+        .then(posts => dispatch(postsFetched(posts)))
+
 }
 
-export const dataPosts = () => ({
-    type: DATA_POSTS,
-    payload: posts
-})
+export const getPostId = id => dispatch => {
+
+    api.post
+        .fetchOne(id)
+        .then(post => dispatch(postFetched(post)))
+}
+
 
 export const likePost = (id) => ({
     type: LIKE_POSTS,
@@ -43,17 +44,3 @@ export const unlikePost = (id) => ({
     type: UNLIKE_POSTS,
     id
 })
-
-export const fetchMoreData = data  => ({
-        type: FETCH_MORE_DATA,
-        data
-
-})
-
-export const getPostId = id => dispatch => {
-    axios.get("https://twig.uz/v1.0/api/posts/"+id+"/")
-    .then(res => dispatch({
-        type: GET_POST_ID,
-        payload: res.data
-    }))
-}
