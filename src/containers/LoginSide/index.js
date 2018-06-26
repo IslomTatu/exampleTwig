@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+
 import Input from '../../components/LoginSide/Input'
 import Button from '../../components/Button'
 
@@ -41,7 +43,7 @@ class LoginSide extends Component{
 
                                 <Button type='submit' value='Enter' color={"#337ab7"} />
 
-                                <a href="#">Register</a>
+                                <Link to="/user/register">Register</Link>
                             </div>
                         </form>
                     </div>

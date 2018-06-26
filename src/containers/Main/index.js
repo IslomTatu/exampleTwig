@@ -61,7 +61,7 @@ class Main extends Component{
                 >
                 {this.state.items.map((post, index) => (
                         <div key={index} className="posts-container" id={"post__"+index} onClick={()=>this.props.getPostId(post.id)}>
-                            <h3><Link to={"/test_"+post.id} >{post.title}</Link></h3>
+                            <h3><Link to={"post/test_"+post.id} >{post.title}</Link></h3>
                             <div className='post-header'>
                                 <div className='user-img-container'>
                                     <img className='user-img' src={"http://keenthemes.com/preview/metronic/theme/assets/pages/media/profile/profile_user.jpg"} alt="user"/>

@@ -10,7 +10,7 @@ const But = styled('button')`
   background-color: ${props => props.color? props.color : '#dee1e3'};
   
   height: 30px;
-  border-radius: 10px;
+  border-radius: 50px;
   color: white;
   font-size: 0.9em;
 `
