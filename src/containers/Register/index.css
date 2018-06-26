@@ -20,4 +20,12 @@
     background-color: #03658c;
 }
 
+#container-register form span{
+    color: red;
+    font-size: .8em;
+    line-height: 15px;
+    padding-left: 5px;
+    padding-top: 5px;
+}
+
 

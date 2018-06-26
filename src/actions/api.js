@@ -2,7 +2,8 @@ import axios from 'axios'
 
 export default {
     user: {
-      login:'',
+      login: credentials =>
+        axios.post("https://twig.uz/v1.0/api/account/create/", {email: credentials.email, username: credentials.username, password: credentials.password}).then(response => console.log("in login api ", response)),
       signup:'',
       confirm:''
     },
