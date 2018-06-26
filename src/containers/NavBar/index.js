@@ -39,7 +39,8 @@ class NavBar extends Component{
                         <li><Logo /></li>
                         <li>
                             <SearchInput search={this.state.search} />
-                            <Search onClick={this.handleClickSearch} />
+                            <Search type={this.state.search} onClick={this.handleClickSearch} />
+                            <hr/>
                             <Profile onClick={this.handleClickProfile} />
                         </li>
                     </ul>

@@ -1,5 +1,6 @@
 import React from 'react'
 import MdSearch from 'react-icons/lib/md/search'
+import MdClose from 'react-icons/lib/md/close'
 
 
 const listItem = {
@@ -8,9 +9,11 @@ const listItem = {
     marginRight: '10px',
 }
 
-const Search = ( {onClick} ) => (
+const Search = ( {onClick, type} ) => (
     <div style={listItem} onClick={onClick}>
-        <MdSearch size={25} color={"grey"} />
+        {type?<MdClose size={25} color={"grey"} />
+            :<MdSearch size={25} color={"grey"} />}
+
     </div>
 )
 
