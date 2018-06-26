@@ -1,0 +1,14 @@
+#container-activation{
+    border: 1px solid black;
+    width: 50%;
+    margin: 10px auto;
+    margin-top: 40px;
+    text-align: center;
+    padding: 20px;
+    color: grey;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#container-activation form{
+    line-height: 60px;
+}

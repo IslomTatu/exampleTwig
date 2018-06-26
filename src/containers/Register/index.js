@@ -35,7 +35,12 @@ class Register extends Component{
             this.setState({ loading: true })
             this.props
                 .login(this.state.data)
-                .then(() => this.props.history.push("/setting/email"))
+                .then(() => {
+                    if (this.props.status == 201){
+                        console.log("yehooooooooooo")
+                        this.props.history.push("/setting/email")
+                    }
+                })
                 .catch(err => {
                         this.setState({errors: err.response.data.errors[0], loading: false})
 
@@ -78,4 +83,9 @@ class Register extends Component{
     }
 }
 
-export default connect(null,{ login })(Register)
+const mapStateToProps = state => ({
+    status: state.user.status
+})
+
+
+export default connect(mapStateToProps,{ login })(Register)
