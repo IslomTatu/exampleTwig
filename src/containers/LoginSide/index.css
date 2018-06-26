@@ -1,5 +1,5 @@
 #login-side{
-    /*border: 1px solid grey;*/
+    border: 1px solid #f0f0f0;
     width: 25%;
     height: auto;
     margin: 10px;
@@ -13,28 +13,55 @@
     padding: 5px;
 
     border-radius: 10px;
+
 }
 #form-container{
     padding: 10px;
+    line-height: 30px;
     text-align: center;
-    line-height: 20px;
+    color: grey;
 
     border-radius: 10px;
 }
-
-.input-group{
-    line-height: 25px;
+form{
+    text-align: initial;
+    /*border: 1px solid black;*/
 }
+form label{
+    margin-left: 20px;
+}
+form a{
+    float: right;
+    color: grey;
+    text-decoration: none;
+    margin-right: 10px;
+}
+.input-group{
+    color: grey;
+    line-height: 35px;
+}
+
 
 #submit-container{
     margin-top: 20px;
 
     border-radius: 10px;
 }
+#submit-container button{
+    margin-left: 10px;
+}
+#submit-container button:hover{
+    background-color: #03658c;
+}
+#submit-container a{
+    float: right;
+    margin-right: 20px;
+}
 
 #via-container{
     text-align: center;
     margin-top: 20px;
+    padding: 10px;
 
     border-radius: 10px;
 }

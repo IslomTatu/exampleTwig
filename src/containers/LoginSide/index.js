@@ -24,22 +24,24 @@ class LoginSide extends Component{
             <div id="login-side">
                 <div id='container-login' style={style}>
                     <div id="form-container" style={style}>
+                        <h4>Enter</h4>
                         <form>
                             <div className='input-group'>
-                                <label htmlFor='name'>Login: </label>
+                                <label htmlFor='name'>Login </label>
                                 <br/>
-                                <MdAccountCircle size={25} color='#dee1e3' />
                                 <Input type='text' name='name'/>
                             </div>
                             <div className='input-group'>
-                                <label htmlFor="password">Password: </label>
+                                <label htmlFor="password">Password </label>
+                                <a href="">forget password?</a>
                                 <br/>
-                                <MdVpnKey size={25} color='#dee1e3' />
                                 <Input type='password' name='password'/>
                             </div>
                             <div id='submit-container'>
-                                <a href="">forget password?</a>
-                                <Button type='submit' value='Enter' />
+
+                                <Button type='submit' value='Enter' color={"#337ab7"} />
+
+                                <a href="#">Register</a>
                             </div>
                         </form>
                     </div>
@@ -53,9 +55,6 @@ class LoginSide extends Component{
                         </div>
                     </div>
 
-                    <div id='register-container' style={style}>
-                        <a href="#">register</a>
-                    </div>
                 </div>
             </div>
         );

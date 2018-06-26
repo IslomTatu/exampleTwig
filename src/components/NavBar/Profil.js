@@ -1,5 +1,5 @@
 import React from 'react'
-import TiUser from 'react-icons/lib/ti/user'
+import IoPerson from 'react-icons/lib/io/person'
 
 const listItem = {
     // border: "1px solid black",
@@ -9,7 +9,7 @@ const listItem = {
 
 const Profile = ( {onClick} ) => (
     <div style={listItem} onClick={onClick}>
-        <TiUser size={25} color={"grey"} />
+        <IoPerson size={25} color={"red"} />
     </div>
 )
 

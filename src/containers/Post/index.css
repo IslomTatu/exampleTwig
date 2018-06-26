@@ -1,25 +1,99 @@
 #container-post{
-    margin: 5px 10px 10px 10px;
+    margin: 5px auto;
     background-color: transparent;
+    width: 94%;
 
+    /*border: 1px solid blue;*/
 }
 
 #main-post{
     background-color: white;
     width: 100%;
-    margin: 5px;
+    margin: 20px auto;
     padding: 10px;
+    border-radius: 10px;
+    position: relative;
 
-    border: 1px solid black;
+    /*border: 1px solid black;*/
 
+}
+
+#head-post{
+    line-height: 30px;
+    font-family: 'Open Sans', sans-serif;
+
+    /*border: 1px solid red;*/
+}
+
+#head-post h4 a{
+    color: grey;
+    font-weight: lighter;
+    margin-left: 10px
+}
+
+#head-post p{
+    font-size: smaller;
+    color: grey;
+}
+
+#body-post{
+    margin: 5px auto;
+    text-align: center;
+
+    /*border: 1px solid black;*/
+}
+
+#body-post img{
+    width: 50%;
+}
+
+#footer-post{
+    line-height: 40px;
+
+    /*border: 1px solid blue;*/
+}
+#footer-post-head{
+    color: grey;
+    display: flex;
+    font-size: small;
+    font-weight: bolder;
+    width: 50%;
+
+    /*border: 2px solid red*/
+}
+#footer-post-head a{
+    text-decoration: none;
+    color: grey;
+    margin-left: 10px;
+}
+#footer-post button{
+    float: none !important;
+    width: 150px;
 }
 
 #main-comment{
     background-color: white;
     width: 100%;
-    height: 60px;
-    margin: 5px;
+    margin: 5px auto;
     padding: 10px;
+    border-radius: 10px;
+    line-height: 40px;
 
-    border: 1px solid black;
+    /*border: 1px solid black;*/
+}
+
+#like-post{
+    position: absolute;
+    top: 15px;
+    right: 50px;
+    text-align: center;
+
+    /*border: 1px solid green;*/
+}
+
+#like-post svg{
+    border-radius: 50%;
+    background-color: #afafaf;
+    color: white;
+    size: 100px;
 }

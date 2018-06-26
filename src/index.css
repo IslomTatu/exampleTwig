@@ -9,7 +9,7 @@ body{
 }
 #container{
     width: 100%;
-    border: 2px solid red;
+    /*border: 2px solid red;*/
     position: relative;
     padding: 2px;
     margin: 0 auto;
@@ -21,7 +21,7 @@ body{
     justify-content: space-between;
     align-items: flex-start;
     width: 100%;
-    border: 2px solid black;
+    /*border: 2px solid black;*/
     margin: 0 auto;
 }
 
