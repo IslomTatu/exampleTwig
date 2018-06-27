@@ -2,7 +2,7 @@ import { USER_LOGGED_IN,
     USER_LOGGED_OUT,
     USER_ACTIVATE_CODE
 } from '../constants'
-import api from './api'
+import api from '../api'
 
 export const userLoggedIn = (status) => ({
     type: USER_LOGGED_IN,
