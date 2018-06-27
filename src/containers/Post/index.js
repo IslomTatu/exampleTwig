@@ -4,7 +4,9 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {getPostId} from "../../actions/postAction";
 
-import Button from '../../components/Button'
+import { Button, Checkbox, Form } from 'semantic-ui-react'
+
+// import Button from '../../components/Button'
 import  FaAngleUp from 'react-icons/lib/fa/angle-up'
 import  FaAngleDown from 'react-icons/lib/fa/angle-down'
 import './index.css'
@@ -56,7 +58,23 @@ class Post extends Component{
                     <p>Comments</p>
                     <p style={{"color":"grey"}}>No Comments yet</p>
                 </div>
+
+                <Form>
+                    <Form.Field>
+                        <label>First Name</label>
+                        <input placeholder='First Name' />
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Last Name</label>
+                        <input placeholder='Last Name' />
+                    </Form.Field>
+                    <Form.Field>
+                        <Checkbox label='I agree to the Terms and Conditions' />
+                    </Form.Field>
+                    <Button type='submit'>Submit</Button>
+                </Form>
             </div>
+
         )
     }
 }

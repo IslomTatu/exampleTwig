@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { active } from '../../actions/auth'
 
+import { Icon } from 'semantic-ui-react'
+
 //components
 import Input from '../../components/Input'
 import Button from '../../components/Button'
@@ -34,12 +36,12 @@ class Activation extends Component{
                 .then(() => {
                     if (this.props.status == 201){
                         console.log("userActive")
-                        this.props.history.push("/")
+                        this.props.history.push("/profile/"+this.props.username)
                     }
                 })
                 .catch(err => {
                         console.log("error in container : ",err)
-                        // this.setState({errors: err.response.data.errors[0], loading: false})
+                        this.setState({errors: err.response.data.code, loading: false})
 
                     }
                 )
@@ -48,11 +50,14 @@ class Activation extends Component{
     }
 
     render(){
+        const { errors,loading } = this.state
         return(
             <div id='container-activation'>
+                <Icon loading active={loading} size='big' color="rbg(255,61,0)" name='hourglass' />
                 <h4>We have sent activation code to your email please check your email and activate your account</h4>
                 <form onSubmit={this.onSubmit}>
                     <Input type="text" name="code" onChange={this.onChange} />
+                    <span style={{"display":errors.length?"block":"none", "color": "red"}}>{errors.length? errors[0]:""}</span>
                     <Button type="submit" value="Active" color="#337ab7" />
                 </form>
 
@@ -62,7 +67,8 @@ class Activation extends Component{
 }
 
 const mapStateToProps = state => ({
-    status: state.user.status
+    status: state.user.status,
+    username: state.user.username
 })
 
 export default connect(mapStateToProps, { active })(Activation)

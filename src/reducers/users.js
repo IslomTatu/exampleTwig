@@ -22,9 +22,9 @@ const user = (state = initialState, action) => {
             return {
                 ...state,
                 status: action.response.status,
-                username: action.response.username,
-                email: action.response.email,
-                avatar: action.response.avatar
+                username: action.response.data.username,
+                email: action.response.data.email,
+                avatar: action.response.data.avatar
             }
 
         default:

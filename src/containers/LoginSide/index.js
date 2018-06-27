@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-
+import { Form } from 'semantic-ui-react'
 import Input from '../../components/LoginSide/Input'
 import Button from '../../components/Button'
 
@@ -27,7 +27,7 @@ class LoginSide extends Component{
                 <div id='container-login' style={style}>
                     <div id="form-container" style={style}>
                         <h4>Enter</h4>
-                        <form>
+                        <Form>
                             <div className='input-group'>
                                 <label htmlFor='name'>Login </label>
                                 <br/>
@@ -45,7 +45,7 @@ class LoginSide extends Component{
 
                                 <Link to="/user/register">Register</Link>
                             </div>
-                        </form>
+                        </Form>
                     </div>
 
                     <div id='via-container' style={style}>

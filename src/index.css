@@ -5,7 +5,7 @@
     font-family: 'Open Sans', sans-serif;
 }
 body{
-    background-color: #dee1e3;
+    background-color: #dee1e3 !important;
 }
 #container{
     width: 100%;

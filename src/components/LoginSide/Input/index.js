@@ -9,7 +9,7 @@ const Input1 = styled('input')`
   padding: 8px 10px;
   position: relative;
   outline: 0;
-  border-radius: 50px;
+  border-radius: 50px !important;
   
   &:focus{
     border-color: #66afe9;
