@@ -53,7 +53,6 @@ class Activation extends Component{
         const { errors,loading } = this.state
         return(
             <div id='container-activation'>
-                <Icon loading active={loading} size='big' color="rbg(255,61,0)" name='hourglass' />
                 <h4>We have sent activation code to your email please check your email and activate your account</h4>
                 <form onSubmit={this.onSubmit}>
                     <Input type="text" name="code" onChange={this.onChange} />

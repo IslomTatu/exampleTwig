@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 const Input1 = styled('input')`
   
-  border: 1px solid #afafaf;
+  border: 1px solid #b9bbbe !important;
   width: 100% !important;
   padding: 7px 10px;
   position: relative;

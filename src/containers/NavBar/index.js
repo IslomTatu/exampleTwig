@@ -35,15 +35,19 @@ class NavBar extends Component{
         return(
             <nav id='navBar'>
                 <div id='navBar-container'>
-                    <ul id='list-items'>
-                        <li><Logo /></li>
-                        <li>
+                    <div id='list-items'>
+                        <div className="list-logo"><Logo /></div>
+                        {/*<div className="list-news">*/}
+                            {/*<p>hot news</p>*/}
+                            {/*<p>popular news</p>*/}
+                        {/*</div>*/}
+                        <div className="list-right">
                             <SearchInput search={this.state.search} />
                             <Search type={this.state.search} onClick={this.handleClickSearch} />
-                            <hr/>
+
                             <Profile onClick={this.handleClickProfile} />
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
             </nav>
         )

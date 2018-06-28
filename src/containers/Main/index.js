@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { connect } from 'react-redux'
+import Moment from 'react-moment'
 import {fetchPosts, getPostId, likePost, unlikePost} from "../../actions/postAction";
 import { bindActionCreators } from 'redux'
 
@@ -55,21 +56,15 @@ class Main extends Component{
                     dataLength={this.state.items.length}
                     next={this.fetchMoreData}
                     hasMore={true}
-
-
-
                 >
                 {this.state.items.map((post, index) => (
                         <div key={index} className="posts-container" id={"post__"+index} onClick={()=>this.props.getPostId(post.id)}>
-                            <h3><Link to={"post/test_"+post.id} >{post.title}</Link></h3>
                             <div className='post-header'>
-                                <div className='user-img-container'>
-                                    <img className='user-img' src={"http://keenthemes.com/preview/metronic/theme/assets/pages/media/profile/profile_user.jpg"} alt="user"/>
-
-                                </div>
+                                <h3><Link to={"post/test_"+post.id} >{post.title}</Link></h3>
                                 <div className='user-data'>
-                                    <p>{post.user.username}</p>
-                                    <p>{post.date}</p>
+                                    <span><Moment  fromNow>{post.date}</Moment></span>
+                                    <p>author <a href="">u/{post.user.username}</a></p>
+                                    <p>from <a href="">t/{post.twig.twig_name}</a></p>
                                 </div>
                             </div>
 

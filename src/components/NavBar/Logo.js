@@ -5,6 +5,8 @@ import logo from './logo/logo_orange.svg'
 
 const Img = styled('img')`
   width: 70px;
+  padding-top: 7px;
+  padding-bottom: 7px;
 `
 
 const style = {

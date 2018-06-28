@@ -1,12 +1,10 @@
 #navBar{
     width: 100%;
-    margin: 0;
-    /*border: 1px solid blue;*/
+    margin: 0 !important;
     display: block;
-    padding: 5px 100px;
-
+    padding: 0 100px;
     position: sticky;
-    top: 0;
+    top: 0 !important;
     background-color: #fff;
     z-index: 1;
 }
@@ -18,25 +16,40 @@
 }
 
 #list-items{
-    list-style-type: none;
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    justify-content: space-between;
+    display: block;
+    /*border: 1px solid black;*/
 }
+
+.list-logo{
+    /*border: 1px solid black;*/
+    display: inline-block;
+}
+
+.list-news{
+    border: 1px solid black;
+    display: inline-block;
+    position: relative;
+    bottom: 15px;
+}
+
+.list-news p{
+    border: 1px solid black;
+    display: inline;
+
+}
+.list-right{
+    /*border: 1px solid black;*/
+    display: inline-block;
+    float: right;
+    padding: auto;
+    height: 100%;
+}
+
 li{
     cursor: pointer;
 }
 
-li hr{
-    display: inline;
-    border: none;
-    border-left: 1px solid grey;
-    position: relative;
-    top: 0;
-    width: 1px;
-    margin: 0 30px;
-}
+
 
 .right-item{
     float: right;

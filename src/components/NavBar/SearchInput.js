@@ -6,14 +6,14 @@ const Input = styled('input')`
   width: 300px;
   display: ${props => props.active ? 'block' : 'none'};
   padding: 2px 10px;
-  border: none;
+
   box-shadow: none;
   border-radius: 10px;
   border: 1px solid #ccc;
   outline: 0;
    
   &:focus{
-      border: none;
+
       box-shadow: none;
       border-radius: 10px;
       border: 1px solid grey;

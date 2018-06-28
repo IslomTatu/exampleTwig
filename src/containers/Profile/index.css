@@ -1,0 +1,22 @@
+#container-profile{
+    margin: 0 auto;
+    /*border: 1px solid black;*/
+    width: 90%;
+    display: flex;
+}
+
+#profile-side{
+    margin: 10px;
+
+    /*border: 1px solid black;*/
+
+}
+
+#main-user{
+    text-align: center;
+    margin: 10px;
+    /*border: 1px solid black;*/
+    background-color: transparent;
+    width: 25%;
+}
+
