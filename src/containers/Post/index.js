@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {getPostId} from "../../actions/postAction";
 
+import Moment from 'react-moment'
 import { Button, Checkbox, Form } from 'semantic-ui-react'
 
 // import Button from '../../components/Button'
@@ -30,7 +31,7 @@ class Post extends Component{
                 <div id='main-post'>
                     <div id='head-post'>
                             <h4>{this.props.post.title} <span><a href="#"><small>(t/{twig_name})</small></a></span></h4>
-                            <p>{this.props.post.date} author <a href="#">u/{username}</a></p>
+                            <p><span><Moment  fromNow>{post.date}</Moment></span> author <a href="#">u/{username}</a></p>
                     </div>
                     <div id='body-post'>
                         {post.media_type==='image'

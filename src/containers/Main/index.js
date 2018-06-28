@@ -105,6 +105,10 @@ class Main extends Component{
             </div>
         )
     }
+
+    componentWillUnMount(){
+
+    }
 }
 
 

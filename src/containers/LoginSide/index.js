@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Form } from 'semantic-ui-react'
 import Input from '../../components/LoginSide/Input'
 import Button from '../../components/Button'
+import { signup } from "../../actions/auth";
 
 //Icons
 import MdAccountCircle from 'react-icons/lib/md/account-circle'
@@ -20,6 +22,34 @@ const style = {
 
 class LoginSide extends Component{
 
+    state = {
+        username: "",
+        password: "",
+        loading: false,
+        errors: []
+    }
+
+    onChange = e =>
+        this.setState({
+            ...this.state,
+            data: { ...this.state.data, [e.target.name]: e.target.value },
+            errors: []
+        })
+
+    onSubmit = e => {
+        e.preventDefault()
+        const errors = []
+        this.setState({ errors })
+        if (Object.keys(errors).length === 0){
+            this.setState({ loading: true })
+            this.props
+                .signup(this.state.data)
+                .then(() => {
+                    console.log( this.props.user )
+                })
+        }
+    }
+
 
     render(){
         return (
@@ -27,17 +57,17 @@ class LoginSide extends Component{
                 <div id='container-login' style={style}>
                     <div id="form-container" style={style}>
                         <h4>Enter</h4>
-                        <Form>
+                        <Form onSubmit={this.onSubmit}>
                             <div className='input-group'>
                                 <label htmlFor='name'>Login </label>
                                 <br/>
-                                <Input type='text' name='name'/>
+                                <Input type='text' name='username' onChange={this.onChange} />
                             </div>
                             <div className='input-group'>
                                 <label htmlFor="password">Password </label>
                                 <a href="">forget password?</a>
                                 <br/>
-                                <Input type='password' name='password'/>
+                                <Input type='password' name='password' onChange={this.onChange}/>
                             </div>
                             <div id='submit-container'>
 
@@ -64,4 +94,5 @@ class LoginSide extends Component{
 }
 
 
-export default LoginSide
+
+export default connect(null, { signup })(LoginSide)

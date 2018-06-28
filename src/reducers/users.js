@@ -1,4 +1,7 @@
-import {USER_ACTIVATE_CODE, USER_LOGGED_IN, USER_LOGGED_OUT} from "../constants"
+import {USER_ACTIVATE_CODE,
+    USER_LOGGED_IN,
+    USER_LOGGED_OUT,
+    USER_SIGNUP } from "../constants"
 
 const initialState = {
     status: 0,
@@ -11,9 +14,7 @@ const user = (state = initialState, action) => {
     switch (action.type){
         case USER_LOGGED_IN:
             console.log("in reducer action.status", action.status)
-
             return {
-                ...state,
                 status: action.status
             }
         case USER_LOGGED_OUT:
@@ -26,6 +27,9 @@ const user = (state = initialState, action) => {
                 email: action.response.data.email,
                 avatar: action.response.data.avatar
             }
+
+        case USER_SIGNUP:
+            return
 
         default:
             return state

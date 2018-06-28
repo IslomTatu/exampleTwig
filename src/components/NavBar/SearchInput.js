@@ -1,16 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
-
+import { Transition } from 'semantic-ui-react'
 
 const Input = styled('input')`
   width: 300px;
-  display: ${props => props.active ? 'block' : 'none'};
+  
   padding: 2px 10px;
 
   box-shadow: none;
   border-radius: 10px;
   border: 1px solid #ccc;
   outline: 0;
+  
+  
    
   &:focus{
 
@@ -28,7 +30,9 @@ const style = {
 }
 const SearchInput = ({search}) => (
     <div style={style}>
-        <Input type='text' active={search}/>
+        <Transition visible={search} animation='slide left' duration={500}>
+            <Input type='text'/>
+        </Transition>
     </div>
 )
 

@@ -6,7 +6,7 @@ const listItem = {
     display: 'inline-block',
     marginRight: '10px',
     paddingLeft: '50px',
-    borderLeft: '1px solid grey',
+    borderLeft: '1px solid #dee1e3',
     paddingTop: '14px',
     paddingBottom: '14px'
 }

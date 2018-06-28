@@ -6,8 +6,11 @@ export default {
     user: {
       login: credentials =>
         axios.post(url+"account/create/", {email: credentials.email, username: credentials.username, password: credentials.password}),
-      signup:'',
-      confirm:'',
+      signup: user =>
+        axios.post(url+"account/login/", {password: user.password, username: user.username}),
+      confirm: token =>
+        axios.get(url+"account/", {headers:{
+                'Authorization': `token ${token}`}}),
       activate: code =>
           axios.post(url+"account/activate/", {code: code})
     },

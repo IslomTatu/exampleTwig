@@ -16,7 +16,7 @@ const App = () => (
 
         <div id="container">
             <NavBar />
-            <Switch>
+
                 <Route exact path='/' component={Home} />
                 <div id='container-inner2'>
                     <Route path='/post/:id' component={Post} />
@@ -24,7 +24,7 @@ const App = () => (
                     <Route path='/setting/email' component={Activation} />
                     <Route path='/profile/:user' component={Profile} />
                 </div>
-            </Switch>
+
         </div>
 
 

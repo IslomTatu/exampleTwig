@@ -23,9 +23,9 @@ const style = {
     display: 'inline-block',
     width: "100%"
 }
-const Input = ( {type, name, value} ) => (
+const Input = ( {type, name, value, onChange} ) => (
     <div style={style}>
-        <Input1 type={type} name={name}  />
+        <Input1 type={type} name={name}  onChange={onChange} />
     </div>
 )
 
