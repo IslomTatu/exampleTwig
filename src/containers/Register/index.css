@@ -1,7 +1,7 @@
 #container-register{
-    /*border: 1px solid black;*/
+    border: 1px solid black;
     width: 50%;
-    margin: 10px auto;
+    margin: 10px auto !important;
     text-align: center;
     padding: 20px;
     color: grey;

@@ -25,6 +25,13 @@ body{
     margin: 0 auto;
 }
 
+#container-inner2{
+    display: block;
+    width: 100%;
+    /*border: 2px solid black;*/
+    margin: 0 auto !important;
+}
+
 
 
 
@@ -42,6 +49,9 @@ body{
 @media only screen and (min-width: 1450px){
 
     #container-inner{
+        width: 1300px;
+    }
+    #container-inner2{
         width: 1300px;
     }
 

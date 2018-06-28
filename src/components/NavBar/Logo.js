@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 import logo from './logo/logo_orange.svg'
@@ -15,7 +16,7 @@ const style = {
 
 const Logo = () => (
         <div style={style}>
-            <Img src={logo} alt=""/>
+            <Link to='/'><Img src={logo} alt=""/></Link>
         </div>
 )
 

@@ -18,7 +18,7 @@ const App = () => (
             <NavBar />
             <Switch>
                 <Route exact path='/' component={Home} />
-                <div id='container-inner'>
+                <div id='container-inner2'>
                     <Route path='/post/:id' component={Post} />
                     <Route path='/user/register' component={Register} />
                     <Route path='/setting/email' component={Activation} />
