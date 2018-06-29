@@ -61,3 +61,8 @@ export const logout = () => dispatch => {
     dispatch(userLogOut())
 }
 
+export const fetchUser = () => dispatch => {
+    let token = localStorage.twigJWT
+    dispatch(confirmUser(token))
+}
+

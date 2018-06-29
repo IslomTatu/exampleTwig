@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import Moment from 'react-moment'
 import { fetchPosts, getPostId, likePost, unlikePost } from "../../actions/postAction";
+import { fetchUser } from "../../actions/auth";
 import { bindActionCreators } from 'redux'
 
 import Icon from 'react-icons-kit'
@@ -25,7 +26,7 @@ class Main extends Component{
     componentDidMount(){
 
         this.props.fetchPosts()
-
+        this.props.fetchUser()
         setTimeout(()=>{
             this.setState({
                 items: this.props.news.slice(0,3)
@@ -107,9 +108,6 @@ class Main extends Component{
         )
     }
 
-    componentWillUnMount(){
-
-    }
 }
 
 
@@ -120,7 +118,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators ({
     fetchPosts,
-    getPostId
+    getPostId,
+    fetchUser
     // likePost: id => dispatch(likePost(id)),
     // unlikePost: id => dispatch(unlikePost(id)),
     // dataPosts:() => dispatch(dataPosts())
