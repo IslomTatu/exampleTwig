@@ -55,6 +55,13 @@
 .post-body video{
     width: 100%;
 }
+.post-footer svg{
+    transition: all .5s;
+}
+.post-footer svg:hover {
+    fill: black;
+    transform: scale(1.5);
+}
 
 .post-footer{
     display: flex;
