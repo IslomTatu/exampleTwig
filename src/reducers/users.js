@@ -7,7 +7,8 @@ const initialState = {
     status: 0,
     username: "",
     email: "",
-    avatar: ""
+    avatar: "",
+    isAuth: false
 }
 
 const user = (state = initialState, action) => {
@@ -21,7 +22,6 @@ const user = (state = initialState, action) => {
             return {}
         case USER_ACTIVATE_CODE:
             return {
-                ...state,
                 status: action.response.status,
                 username: action.response.data.username,
                 email: action.response.data.email,
@@ -29,7 +29,12 @@ const user = (state = initialState, action) => {
             }
 
         case USER_SIGNUP:
-            return
+            return {
+                username: action.user.username,
+                email: action.user.email,
+                avatar: action.user.avatar,
+                isAuth: !!localStorage.twigJWT
+            }
 
         default:
             return state

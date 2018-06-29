@@ -5,12 +5,18 @@ const style = {
     "width": "25%",
     "backgroundColor": "white",
     "borderRadius": "5px",
-    "height": 150
+    "height": 250
 }
 
-const ProfileSide = () => (
+const ProfileSide = ({ onClick, username }) => (
     <div id="profile-side" style={style}>
         <List selection verticalAlign='middle'>
+            <List.Item>
+                <List.Header>
+                    <Icon name="smile outline" />
+                    <h3>Welcome {username}</h3>
+                </List.Header>
+            </List.Item>
             <List.Item>
                 <Icon name='home'/>
                 <List.Content>My Page</List.Content>
@@ -27,8 +33,13 @@ const ProfileSide = () => (
                 <Icon name='list'/>
                 <List.Content>Twigs</List.Content>
             </List.Item>
+            <List.Item onClick={onClick}>
+                <Icon name='sign out'/>
+                <List.Content>Log out</List.Content>
+            </List.Item>
         </List>
     </div>
+
 )
 
 export default ProfileSide

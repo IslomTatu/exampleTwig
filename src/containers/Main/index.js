@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import Moment from 'react-moment'
-import {fetchPosts, getPostId, likePost, unlikePost} from "../../actions/postAction";
+import { fetchPosts, getPostId, likePost, unlikePost } from "../../actions/postAction";
 import { bindActionCreators } from 'redux'
 
 import Icon from 'react-icons-kit'
@@ -25,6 +25,7 @@ class Main extends Component{
     componentDidMount(){
 
         this.props.fetchPosts()
+
         setTimeout(()=>{
             this.setState({
                 items: this.props.news.slice(0,3)

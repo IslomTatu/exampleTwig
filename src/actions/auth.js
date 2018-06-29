@@ -20,8 +20,6 @@ export const activateCode =  (response) => ({
 export const login = credentials => dispatch =>
     api.user.login(credentials).then(response => {
         console.log("in auth action response", response)
-        localStorage.twigJWT = response.data.auth_token
-        setAuthorizationHeader(response.data.auth_token)
         dispatch(userLoggedIn(response.status))
     })
 
@@ -39,7 +37,11 @@ export const userSignup = user => ({
 export const confirmUser = token => dispatch =>
     api.user.confirm(token).then((res) => {
         console.log("this is in confirmUser ", res)
-        window.location.assign("/")
+        if (res.status === 200 || res.status === "OK"){
+            localStorage.twigJWT = token
+            setAuthorizationHeader(token)
+            dispatch(userSignup(res.data))
+        }
     })
 
 export const signup = user => dispatch =>
@@ -47,3 +49,15 @@ export const signup = user => dispatch =>
         console.log("token in signup", response.data.auth_token)
         dispatch(confirmUser(response.data.auth_token))
     })
+
+
+export const userLogOut = () => ({
+    type: USER_LOGGED_OUT
+})
+
+export const logout = () => dispatch => {
+    delete localStorage.twigJWT
+    setAuthorizationHeader()
+    dispatch(userLogOut())
+}
+
