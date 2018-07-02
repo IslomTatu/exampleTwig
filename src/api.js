@@ -18,10 +18,25 @@ export default {
       activate: code =>
           axios.post(url+"account/activate/", {code: code}).then(res => res.data)
     },
-    posts: {
-        fetchAll: () => axios.get(url+'posts/', {}).then(res => res.data.results)
-    },
     post: {
-        fetchOne: id => axios.get(`${url}posts/${id}`, {}).then(res => res.data)
+        fetchAll: () => axios.get(url+'posts/', {}).then(res => res.data.results),
+        fetchOne: id => axios.get(`${url}posts/${id}`, {}).then(res => res.data),
+        fetchComments: (id, token) => axios.get(`${url}posts/${id}/comments/`,{headers:{
+            'Authorization': `token ${token}`}} )
+            .then(res => res.data.results),
+        comment: (data, token) => axios.post(`${url}posts/${data.post_id}/comments/`,
+            {   headers:{
+                    'Authorization': `token ${token}`
+                },
+                 data: {
+                     user: data.user,
+                     comment_text: data.comment_text,
+                     parent_comment: data.parent_comment
+                 }
+            })
+            .then(res => {
+                console.log("in api res comment", res)
+                return res
+            })
     }
 }

@@ -79,8 +79,16 @@
     border-radius: 10px;
     line-height: 40px;
 
-    /*border: 1px solid black;*/
+    border: 1px solid black;
 }
+
+.container-comments{
+    padding: 5px 10px;
+    border: 1px solid black;
+}
+
+
+
 
 #like-post{
     position: absolute;

@@ -1,11 +1,12 @@
 import {
     LIKE_POSTS, UNLIKE_POSTS,
-    POSTS_FETCHED, POST_FETCHED
+    POSTS_FETCHED, POST_FETCHED, COMMENTS_FETCHED
 } from "../constants";
 
 const initialState = {
     items: [],
-    item: {}
+    item: {},
+    comments: []
 }
 
 const postReducer = (state = initialState, action) => {
@@ -15,32 +16,36 @@ const postReducer = (state = initialState, action) => {
                 ...state,
                 items: action.data
             }
-            break
+
         case POST_FETCHED:
             return {
                 ...state,
                 item: action.data
             }
+
+        case COMMENTS_FETCHED:
+            return {
+                ...state,
+                comments: action.payload
+            }
         case LIKE_POSTS:
 
             return {
                 ...state,
-                items: state.items.map(item => (item.id == action.id)
+                items: state.items.map(item => (item.id === action.id)
                     ? {...item, like: item.like + 1}
                     : item
                 )
             }
-            break
         case UNLIKE_POSTS:
 
             return {
                 ...state,
-                items: state.items.map(item => (item.id == action.id)
+                items: state.items.map(item => (item.id === action.id)
                     ? {...item, unlike: item.unlike - 1}
                     : item
                 )
             }
-            break
 
         default:
             return state

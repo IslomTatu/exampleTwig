@@ -8,7 +8,6 @@ import user from './users'
 export default combineReducers({
     routing: routerReducer,
     news: postReducer,
-    posts: sendData,
     user: user
 
 })

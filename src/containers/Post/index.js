@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import {getPostId} from "../../actions/postAction";
+import {getPostId, getComments, sendComment} from "../../actions/postAction";
 
 import Moment from 'react-moment'
-import { Button, Checkbox, Form } from 'semantic-ui-react'
+import { Button, Icon, Form, Comment, Header } from 'semantic-ui-react'
 
 // import Button from '../../components/Button'
 import  FaAngleUp from 'react-icons/lib/fa/angle-up'
@@ -14,12 +14,64 @@ import './index.css'
 
 class Post extends Component{
 
+    state = {
+        data:{
+          post_id: 0,
+          user : {
+              username: ""
+          },
+          comment_text: "",
+          parent_comment: 0
+        },
+        loading: false,
+        errors: []
+    }
 
     componentWillMount() {
-        this.props.getPostId(this.props.match.url.slice(-3))
-        this.props.getComments(this.props.match.url.slice(-3))
+        const postID = this.props.match.url.slice(-3)
+        this.props.getPostId(postID)
+        this.props.getComments(postID)
         console.log(this.props.match)
+
+        this.setState({
+            data: {
+                ...this.state.data,
+                post_id: postID,
+                user: {
+                    ...this.state.data.user,
+                    username: "islom"
+                }
+            }
+        })
     }
+
+
+    onChange = (e) => {
+        this.setState({
+            ...this.state,
+            data: { ...this.state.data,
+                comment_text: e.target.value,
+            }
+        })
+
+        console.log(this.state)
+    }
+
+    onSubmit = (e) => {
+        e.preventDefault()
+        if(Object.keys(this.state.errors).length === 0) {
+
+            this.setState({ loading : true })
+        }
+        this.props
+            .sendComment(this.state.data)
+            // .catch(err => {
+            //     console.log("error in comment", err)
+            // })
+
+
+    }
+
 
 
     render(){
@@ -27,6 +79,10 @@ class Post extends Component{
         const { username } = (this.props.post.user || {})
         const { twig_name } = (this.props.post.twig || {})
         const  media  = (this.props.post.media || [])
+
+        const comments = this.props.comments.filter(parent => parent.parent_comment === 0)
+        const reComments = this.props.comments.filter(parent => parent.parent_comment !== 0)
+        const {parent_comment} = reComments
         return (
             <div id='container-post'>
                 <div id='main-post'>
@@ -57,24 +113,62 @@ class Post extends Component{
                 </div>
 
                 <div id='main-comment'>
-                    <p>Comments</p>
-                    <p style={{"color":"grey"}}>No Comments yet</p>
-                </div>
+                    <div className="container-comments">
+                        <Comment.Group threaded>
+                            <Header as='h3' dividing>
+                                Comments
+                            </Header>
+                            {comments.map((comment, index) =>
+                                <Comment key={index}>
+                                    <Comment.Avatar as='a'/>
+                                    <Comment.Content>
+                                        <Comment.Author as='a'>{comment.user.username}</Comment.Author>
+                                        <Comment.Metadata>
+                                            <span><Moment fromNow>{comment.date}</Moment></span>
+                                        </Comment.Metadata>
+                                        <Comment.Text>
+                                            <p>{comment.comment_text}</p>
+                                        </Comment.Text>
+                                        <Comment.Actions>
+                                            <a>Reply</a>
+                                        </Comment.Actions>
+                                    </Comment.Content>
 
-                <Form>
-                    <Form.Field>
-                        <label>First Name</label>
-                        <input placeholder='First Name' />
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Last Name</label>
-                        <input placeholder='Last Name' />
-                    </Form.Field>
-                    <Form.Field>
-                        <Checkbox label='I agree to the Terms and Conditions' />
-                    </Form.Field>
-                    <Button type='submit'>Submit</Button>
-                </Form>
+
+                                    {reComments.map((reCom, index) => (
+                                        <div key={index}>
+                                            {
+                                                reCom.parent_comment === comment.id
+                                                ? <Comment.Group>
+                                                    <Comment>
+                                                        <Comment.Avatar as='a'/>
+                                                        <Comment.Content>
+                                                            <Comment.Author as='a'>{reCom.user.username}</Comment.Author>
+                                                            <Comment.Metadata>
+                                                                <span><Moment fromNow>{reCom.date}</Moment></span>
+                                                            </Comment.Metadata>
+                                                            <Comment.Text>{reCom.comment_text}</Comment.Text>
+                                                            <Comment.Actions>
+                                                                <a>Reply</a>
+                                                            </Comment.Actions>
+                                                        </Comment.Content>
+                                                    </Comment>
+                                                </Comment.Group>
+                                                :""
+                                            }
+                                        </div>
+                                    ))}
+                                </Comment>
+
+
+                            )}
+                            <Form reply onSubmit={this.onSubmit}>
+                                <Form.TextArea onChange={this.onChange} />
+                                <Button content='Add Reply' labelPosition='left' icon='edit' primary />
+                            </Form>
+                        </Comment.Group>
+                    </div>
+                </div>
             </div>
 
         )
@@ -82,25 +176,35 @@ class Post extends Component{
 }
 
 Post.propTypes = {
-    post: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        twig: PropTypes.object.isRequired,
-        user: PropTypes.object.isRequired,
-        text: PropTypes.string.isRequired,
-
-        media: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired
-    }).isRequired
+    // post: PropTypes.objectOf(PropTypes.shape({
+    //     id: PropTypes.number.isRequired,
+    //     title: PropTypes.string.isRequired,
+    //     twig: PropTypes.object.isRequired,
+    //     user: PropTypes.object.isRequired,
+    //     text: PropTypes.string.isRequired,
+    //     media: PropTypes.string.isRequired,
+    //     date: PropTypes.string.isRequired
+    // })).isRequired
+    // comments: PropTypes.shape({
+    //     id: PropTypes.number.isRequired,
+    //     user: PropTypes.object.isRequired,
+    //     comment_tex: PropTypes.string.isRequired,
+    //     parent_comment: PropTypes.number.isRequired,
+    //     date: PropTypes.string.isRequired
+    // }).isRequired
 }
 
 
 const mapStateToProps = state => ({
-    post: state.news.item
+    post: state.news.item,
+    comments: state.news.comments,
+    user: state.user.username
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-    getPostId: id => getPostId(id)
+    getPostId: id => getPostId(id),
+    getComments: id => getComments(id),
+    sendComment: data => sendComment(data)
 },dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Post)
