@@ -1,53 +1,51 @@
 import { USER_LOGGED_IN,
     USER_LOGGED_OUT,
     USER_ACTIVATE_CODE,
-    USER_SIGNUP
+    USER_SIGN_UP
 } from '../constants'
 import api from '../api'
 import setAuthorizationHeader from "../utils/setAuthorizationHeader";
 
-export const userLoggedIn = (status) => ({
-    type: USER_LOGGED_IN,
-    status
+export const userSignUp = () => ({
+    type: USER_SIGN_UP
 })
 
-export const activateCode =  (response) => ({
+export const activateCode =  (payload) => ({
     type: USER_ACTIVATE_CODE,
-    response
+    payload
 })
 
 
-export const login = credentials => dispatch =>
-    api.user.login(credentials).then(response => {
-        console.log("in auth action response", response)
-        dispatch(userLoggedIn(response.status))
+export const signup = credentials => dispatch =>
+    api.user.singup(credentials).then(token => {
+        localStorage.twigJWT = token
+        dispatch(userSignUp())
     })
 
 export const active = code => dispatch =>
-    api.user.activate(code).then(response => {
-        console.log("in auth action active code response", response)
-        dispatch(activateCode(response))
+    api.user.activate(code).then(user => {
+        dispatch(activateCode(user))
     })
 
-export const userSignup = user => ({
-    type: USER_SIGNUP,
-    user
+export const userLogIn = payload => ({
+    type: USER_LOGGED_IN,
+    payload
 })
 
 export const confirmUser = token => dispatch =>
-    api.user.confirm(token).then((res) => {
-        console.log("this is in confirmUser ", res)
-        if (res.status === 200 || res.status === "OK"){
-            localStorage.twigJWT = token
-            setAuthorizationHeader(token)
-            dispatch(userSignup(res.data))
+    api.user.confirm(token).then((user) => {
+        if(!!localStorage.twigJWT){
+            delete localStorage.twigJWT
         }
+        localStorage.twigJWT = token
+        setAuthorizationHeader(token)
+        dispatch(userLogIn(user))
+
     })
 
-export const signup = user => dispatch =>
-    api.user.signup(user).then(response => {
-        console.log("token in signup", response.data.auth_token)
-        dispatch(confirmUser(response.data.auth_token))
+export const login = user => dispatch =>
+    api.user.login(user).then(token => {
+        dispatch(confirmUser(token))
     })
 
 
@@ -62,7 +60,12 @@ export const logout = () => dispatch => {
 }
 
 export const fetchUser = () => dispatch => {
-    let token = localStorage.twigJWT
-    dispatch(confirmUser(token))
+    if(!!localStorage.twigJWT){
+        let token = localStorage.twigJWT
+        dispatch(confirmUser(token))
+    }
+    else{
+        console.log("PLEASE LOGIN or SIGN UP! :)")
+    }
 }
 

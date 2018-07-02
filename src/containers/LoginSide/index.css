@@ -21,6 +21,13 @@
     color: grey;
     border-radius: 10px;
 }
+
+#form-container span{
+    color: red;
+    font-size: .8em
+}
+
+
 form{
     text-align: initial;
     /*border: 1px solid black;*/

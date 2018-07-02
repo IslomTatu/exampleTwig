@@ -17,6 +17,7 @@ class Post extends Component{
 
     componentWillMount() {
         this.props.getPostId(this.props.match.url.slice(-3))
+        this.props.getComments(this.props.match.url.slice(-3))
         console.log(this.props.match)
     }
 

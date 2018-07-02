@@ -25,7 +25,9 @@
     font-size: .8em;
     line-height: 15px;
     padding-left: 5px;
-    padding-top: 5px;
 }
 
+.ui.loading.form:before{
+    background-color: rgba(255, 255, 255, .1) !important;
+}
 

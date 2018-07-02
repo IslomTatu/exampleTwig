@@ -1,39 +1,33 @@
 import {USER_ACTIVATE_CODE,
     USER_LOGGED_IN,
     USER_LOGGED_OUT,
-    USER_SIGNUP } from "../constants"
+    USER_SIGN_UP } from "../constants"
 
 const initialState = {
-    status: 0,
     username: "",
     email: "",
-    avatar: "",
-    isAuth: false
+    avatar: ""
 }
 
 const user = (state = initialState, action) => {
     switch (action.type){
+        case USER_SIGN_UP:
+            return {}
         case USER_LOGGED_IN:
-            console.log("in reducer action.status", action.status)
             return {
-                status: action.status
+                ...state,
+                username: action.payload.username,
+                email: action.payload.email,
+                avatar: action.payload.avatar
             }
         case USER_LOGGED_OUT:
             return {}
         case USER_ACTIVATE_CODE:
             return {
-                status: action.response.status,
-                username: action.response.data.username,
-                email: action.response.data.email,
-                avatar: action.response.data.avatar
-            }
-
-        case USER_SIGNUP:
-            return {
-                username: action.user.username,
-                email: action.user.email,
-                avatar: action.user.avatar,
-                isAuth: !!localStorage.twigJWT
+                ...state,
+                username: action.payload.username,
+                email: action.payload.email,
+                avatar: action.payload.avatar
             }
 
         default:

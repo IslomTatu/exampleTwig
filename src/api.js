@@ -4,15 +4,19 @@ const url = "https://twig.uz/v1.0/api/"
 
 export default {
     user: {
-      login: credentials =>
-        axios.post(url+"account/create/", {email: credentials.email, username: credentials.username, password: credentials.password}),
-      signup: user =>
-        axios.post(url+"account/login/", {password: user.password, username: user.username}),
+      singup: credentials =>
+        axios.post(url+"account/create/", {email: credentials.email, username: credentials.username, password: credentials.password})
+            .then(res => res.data.auth_token
+            ),
+      login: user =>
+        axios.post(url+"account/login/", {password: user.password, username: user.username})
+            .then(res => res.data.auth_token),
       confirm: token =>
         axios.get(url+"account/", {headers:{
-                'Authorization': `token ${token}`}}),
+                'Authorization': `token ${token}`}})
+            .then(res => res.data),
       activate: code =>
-          axios.post(url+"account/activate/", {code: code})
+          axios.post(url+"account/activate/", {code: code}).then(res => res.data)
     },
     posts: {
         fetchAll: () => axios.get(url+'posts/', {}).then(res => res.data.results)

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { login } from '../../actions/auth'
+import { signup } from '../../actions/auth'
 
 import { Loader, Form } from 'semantic-ui-react'
 //components
@@ -36,22 +36,16 @@ class Register extends Component{
         if(Object.keys(errors).length === 0){
             this.setState({ loading: true })
             this.props
-                .login(this.state.data)
+                .signup(this.state.data)
                 .then(() => {
-                    if (this.props.status == 201){
-                        console.log("yehooooooooooo")
-                        this.props.history.push("/setting/email")
-                    }
+                    this.props.history.push("/setting/email")
                 })
                 .catch(err => {
-                        if(err.response.status === 400)
-                        this.setState({errors: err.response.data.errors, loading: false})
-                        else{
-                            console.log("error is error: ", err)
-                        }
-
-                    }
-                )
+                    console.log(err.response)
+                    // if(err.response.status !== 201 || err.response.status !== 200){
+                        this.setState({ errors: err.response.data.errors, loading: false })
+                    // }
+                })
         }
     }
 
@@ -63,15 +57,14 @@ class Register extends Component{
     }
 
     render(){
-        const { data, errors, loading } = this.state
+        const { errors, loading } = this.state
         const errEmail = errors.find(field => field.field === 'email')
         const errLogin = errors.find(field => field.field === 'username')
         const errPassword = errors.find(field => field.field === 'password')
         return(
             <div id="container-register">
                 <h4>{errors.field === 'email'? errors.message: "go home"}</h4>
-                <h4>{data.login}</h4>
-                <h4>{data.password}</h4>
+                <h2>Register</h2>
                 <Form onSubmit={this.onSubmit} loading={loading}>
                     <label htmlFor="email">Email</label>
                     <br/>
@@ -100,4 +93,4 @@ const mapStateToProps = state => ({
 })
 
 
-export default connect(mapStateToProps,{ login })(Register)
+export default connect(mapStateToProps,{ signup })(Register)

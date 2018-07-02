@@ -8,5 +8,5 @@ export const USER_LOGGED_IN = "USER_LOGGED_IN"
 export const USER_LOGGED_OUT = "USER_LOGGED_OUT"
 export const USER_ACTIVATE_CODE = "USER_ACTIVATE_CODE"
 
-export const USER_SIGNUP = "USER_SIGNUP"
+export const USER_SIGN_UP = "USER_SIGN_UP"
 export const FETCH_USER = "FETCH_USER"

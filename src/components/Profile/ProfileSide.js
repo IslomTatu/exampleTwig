@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { List, Icon } from 'semantic-ui-react'
 
 const style = {
@@ -18,8 +19,12 @@ const ProfileSide = ({ onClick, username }) => (
                 </List.Header>
             </List.Item>
             <List.Item>
-                <Icon name='home'/>
-                <List.Content>My Page</List.Content>
+                <Link style={{"display": "flex"}}
+                    to={`/profile/${username}`}
+                >
+                    <Icon name='home'/>
+                    <List.Content>My Page</List.Content>
+                </Link>
             </List.Item>
             <List.Item>
                 <Icon name='newspaper outline'/>
