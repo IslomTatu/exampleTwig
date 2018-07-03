@@ -65,6 +65,9 @@ class Post extends Component{
         }
         this.props
             .sendComment(this.state.data)
+            .then(() => {
+                window.reload(true)
+            })
             // .catch(err => {
             //     console.log("error in comment", err)
             // })
@@ -213,7 +216,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
     getPostId: id => getPostId(id),
     getComments: id => getComments(id),
-    sendComment: data => sendComment(data)
+    sendComment,
 },dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Post)

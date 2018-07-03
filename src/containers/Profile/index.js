@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchUser } from '../../actions/auth'
-import { Icon, Button } from 'semantic-ui-react'
+import { fetchTwigs } from '../../actions/twigs'
+import {List, Icon, Button, Image } from 'semantic-ui-react'
 
 //components
 import ProfileSide from '../../components/Profile/ProfileSide'
 import UserSide from '../../components/Profile/UserSide'
 //style
 import './index.css'
+
+import logo from '../../utils/t.png'
 
 
 class Profile extends Component{
@@ -16,9 +19,15 @@ class Profile extends Component{
         this.props.history.push('/create')
     }
 
+    componentWillMount(){
+        this.props.fetchUser()
+        this.props.fetchTwigs()
+    }
+
 
     render(){
         const { user } = this.props.match.params
+        const { twigs } = this.props
         return(
             <div id="container-profile">
                 <ProfileSide />
@@ -32,6 +41,18 @@ class Profile extends Component{
 
                     <UserSide>
                         <h4>My Twigs</h4>
+                        {twigs.length === 0
+                            ? ""
+                            : <List selection verticalAlign={"middle"}>
+                                {twigs.map((twig, index) => (
+                                    <List.Item key={index}>
+                                        <Image avatar src={logo} />
+                                        <List.Content>
+                                            {twig.twig_name}
+                                        </List.Content>
+                                    </List.Item>
+                                ))}
+                            </List>}
                         <Button size='tiny' animated="fade" color="google plus" onClick={this.addTwig}>
                             <Button.Content visible>Add Twig</Button.Content>
                             <Button.Content hidden><Icon name='plus'  /></Button.Content>
@@ -56,4 +77,8 @@ class Profile extends Component{
     }
 }
 
-export default connect(null, { fetchUser })(Profile)
+const mapStateToProps = state => ({
+    twigs: state.twigs.twigs
+})
+
+export default connect(mapStateToProps, { fetchUser, fetchTwigs })(Profile)
