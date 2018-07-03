@@ -9,7 +9,7 @@ const style = {
     "height": 250
 }
 
-const ProfileSide = ({ onClick, username }) => (
+const ProfileSide = ({ onClick, username, goMyPage }) => (
     <div id="profile-side" style={style}>
         <List selection verticalAlign='middle'>
             <List.Item>
@@ -18,7 +18,7 @@ const ProfileSide = ({ onClick, username }) => (
                     <h3>Welcome {username}</h3>
                 </List.Header>
             </List.Item>
-            <List.Item>
+            <List.Item onClick={goMyPage}>
                 <Link style={{"display": "flex"}}
                     to={`/profile/${username}`}
                 >

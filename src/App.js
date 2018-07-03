@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import NavBar from './containers/NavBar'
@@ -7,15 +7,20 @@ import Post from './containers/Post'
 import Register from './containers/Register'
 import Activation from './containers/Activation'
 import Profile from './containers/Profile'
+import AddTwig from './containers/AddTwig'
 
 //style
 import 'semantic-ui-css/semantic.min.css'
 import './index.css'
 
-const App = () => (
+class App extends Component{
 
-        <div id="container">
-            <NavBar />
+
+
+    render(){
+        return(
+            <div id="container">
+                <NavBar />
 
                 <Route exact path='/' component={Home} />
                 <div id='container-inner2'>
@@ -23,11 +28,12 @@ const App = () => (
                     <Route path='/user/register' component={Register} />
                     <Route path='/setting/email' component={Activation} />
                     <Route path='/profile/:user' component={Profile} />
+                    <Route path='/create' component={AddTwig}/>
                 </div>
 
-        </div>
+            </div>
+        )
+    }
 
-
-)
-
+}
 export default App

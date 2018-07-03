@@ -29,8 +29,8 @@ class Post extends Component{
 
     componentWillMount() {
         const postID = this.props.match.url.slice(-3)
-        this.props.getPostId(postID)
-        this.props.getComments(postID)
+        this.props.getPostId(this.props.match.url.slice(-3))
+        this.props.getComments(this.props.match.url.slice(-3))
         console.log(this.props.match)
 
         this.setState({
@@ -173,7 +173,16 @@ class Post extends Component{
 
         )
     }
+
+
+
+    componentDidMount(){
+
+
+    }
 }
+
+
 
 Post.propTypes = {
     // post: PropTypes.objectOf(PropTypes.shape({

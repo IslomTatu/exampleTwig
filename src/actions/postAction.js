@@ -66,7 +66,7 @@ export const getComments = id => dispatch => {
         authToken = localStorage.twigJWT
     }
     api.post
-        .fetchComments(id, authToken)
+        .fetchComments(id)
         .then(data => {
             dispatch(commentsFetched(data))
         })

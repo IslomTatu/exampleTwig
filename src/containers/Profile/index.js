@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
+import { fetchUser } from '../../actions/auth'
 import { Icon, Button } from 'semantic-ui-react'
 
 //components
@@ -11,6 +11,10 @@ import './index.css'
 
 
 class Profile extends Component{
+
+    addTwig = () =>{
+        this.props.history.push('/create')
+    }
 
 
     render(){
@@ -28,7 +32,7 @@ class Profile extends Component{
 
                     <UserSide>
                         <h4>My Twigs</h4>
-                        <Button size='tiny' animated="fade" color="google plus">
+                        <Button size='tiny' animated="fade" color="google plus" onClick={this.addTwig}>
                             <Button.Content visible>Add Twig</Button.Content>
                             <Button.Content hidden><Icon name='plus'  /></Button.Content>
                         </Button>
@@ -52,4 +56,4 @@ class Profile extends Component{
     }
 }
 
-export default connect(null, null)(Profile)
+export default connect(null, { fetchUser })(Profile)

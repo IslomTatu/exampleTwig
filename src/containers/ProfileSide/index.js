@@ -10,13 +10,13 @@ class ProfileSideContainer extends Component{
         this.props.logout()
     }
 
-
     render(){
         const { user } = this.props
         return(
             <ProfileSide
                 onClick={this.onClick}
                 username={user}
+
             />
         )
     }
