@@ -5,16 +5,18 @@ import { POSTS_FETCHED,
     POST_FETCHED,
     COMMENTS_FETCHED,
     COMMENTS_ERROR,
-    COMMENT_READY
+    COMMENT_READY,
+    POSTS_FETCHING,
+    POSTS_ERROR
 
 } from "../constants";
 import api from '../api'
 
 import axios from 'axios'
 
-const postsFetched = data => ({
+const postsFetched = payload => ({
     type: POSTS_FETCHED,
-    data
+    payload
 })
 
 const postFetched = data => ({
@@ -22,10 +24,26 @@ const postFetched = data => ({
     data
 })
 
+
+const postsFetching = () => ({
+    type: POSTS_FETCHING
+})
+
+const postsError = () => ({
+    type: POSTS_ERROR
+})
 export const  fetchPosts = () => dispatch  => {
+    dispatch(postsFetching())
     api.post
         .fetchAll()
+        .then(res => {
+
+            return res.data.results
+        })
         .then(posts => dispatch(postsFetched(posts)))
+        .catch(err => {
+            dispatch(postsError())
+        })
 
 }
 

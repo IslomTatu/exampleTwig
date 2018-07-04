@@ -1,3 +1,5 @@
+export const POSTS_FETCHING = "POSTS_FETCHING"
+export const POSTS_ERROR = "POSTS_ERROR"
 export const POSTS_FETCHED = 'POSTS_FETCHED'
 export const POST_FETCHED = "POST_FETCHED"
 

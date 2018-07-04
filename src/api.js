@@ -22,7 +22,7 @@ export default {
             axios.post(url + "account/activate/", {code: code}).then(res => res.data)
     },
     post: {
-        fetchAll: () => axios.get(url + 'posts/', {}).then(res => res.data.results),
+        fetchAll: () => axios.get(url + 'posts/', {}),
         fetchOne: id => axios.get(`${url}posts/${id}`, {}).then(res => res.data),
         fetchComments: (id) => axios.get(`${url}posts/${id}/comments/`)
             .then(res => res.data.results),

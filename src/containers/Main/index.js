@@ -7,6 +7,7 @@ import { fetchPosts, getPostId, likePost, unlikePost } from "../../actions/postA
 import { fetchUser } from "../../actions/auth";
 import { bindActionCreators } from 'redux'
 
+import { Dimmer, Loader } from 'semantic-ui-react'
 import Icon from 'react-icons-kit'
 import {comment} from 'react-icons-kit/fa/comment'
 import {share} from 'react-icons-kit/fa/share'
@@ -21,11 +22,14 @@ class Main extends Component{
     state = {
         items: [],
         begin: 3,
-        end: 6
+        end: 6,
+        errors: [],
+        loading: false
     }
-    componentDidMount(){
+    componentWillMount(){
 
-        this.props.fetchPosts()
+        this.props
+            .fetchPosts()
         // this.props.fetchUser()
         setTimeout(()=>{
             this.setState({
@@ -52,6 +56,7 @@ class Main extends Component{
 
     render(){
 
+        const { loading } = this.props
         return (
             <div id="main">
                 <InfiniteScroll
@@ -59,6 +64,9 @@ class Main extends Component{
                     next={this.fetchMoreData}
                     hasMore={true}
                 >
+                    <Dimmer active={loading}>
+                        <Loader />
+                    </Dimmer>
                 {this.state.items.map((post, index) => (
                         <div key={index} className="posts-container" id={"post__"+index} onClick={()=>this.props.getPostId(post.id)}>
                             <div className='post-header'>
@@ -112,7 +120,8 @@ class Main extends Component{
 
 
 const mapStateToProps = state => ({
-    news: state.news.items
+    news: state.news.items,
+    loading: state.news.loading
 
 })
 
