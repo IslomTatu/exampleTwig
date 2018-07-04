@@ -80,13 +80,9 @@ export const commentReady = payload => ({
     payload
 })
 
-export const sendComment = (data) => dispatch =>{
-    let authToken = 'token'
-    if(!!localStorage.twigJWT){
-        authToken = localStorage.twigJWT
-    }
-    api.post.comment(data, authToken).
+export const sendComment = (data) => dispatch =>
+    api.post.comment(data).
         then(data => {
             dispatch(commentReady(data))
     })
-}
+

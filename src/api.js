@@ -15,12 +15,8 @@ export default {
         login: user =>
             axios.post(url + "account/login/", {password: user.password, username: user.username})
                 .then(res => res.data.auth_token),
-        confirm: token =>
-            axios.get(url + "account/", {
-                headers: {
-                    'Authorization': `token ${token}`
-                }
-            })
+        confirm: () =>
+            axios.get(url + "account/")
                 .then(res => res.data),
         activate: code =>
             axios.post(url + "account/activate/", {code: code}).then(res => res.data)
@@ -30,18 +26,11 @@ export default {
         fetchOne: id => axios.get(`${url}posts/${id}`, {}).then(res => res.data),
         fetchComments: (id) => axios.get(`${url}posts/${id}/comments/`)
             .then(res => res.data.results),
-        comment: (data, token) => axios.post(`${url}posts/${data.post_id}/comments/`, {
+        comment: (data) => axios.post(`${url}posts/${data.post_id}/comments/`, {
             comment_text: data.comment_text,
             parent_comment: data.parent_comment
-        }, {
-            headers: {
-                'Authorization': `Token ${token}`
-            }
         })
-            .then(res => {
-                console.log("in api res comment", res)
-                return res
-            })
+            .then(res => res)
     },
     twig: {
         create: data => axios.post(`${url}account/twigs/`,

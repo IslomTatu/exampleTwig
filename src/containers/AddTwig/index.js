@@ -61,15 +61,18 @@ class AddTwig  extends Component{
             })
             this.props
                 .addTwig(this.state.data)
-                .then(() => {
-                    this.setState({
-                        loading: false
-                    })
-                    this.props.history.push(`/user/${this.props.user}`)
-                })
-                .catch(err => {
-                    this.setState({errors: err.response.data, loading: false})
-                })
+            this.setState({
+                loading: false
+            })
+                // .then(() => {
+                //     this.setState({
+                //         loading: false
+                //     })
+                //     this.props.history.push(`/user/${this.props.user}`)
+                // })
+                // .catch(err => {
+                //     this.setState({errors: err.response.data, loading: false})
+                // })
         }
     }
     render() {

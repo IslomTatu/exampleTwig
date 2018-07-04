@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchUser } from '../../actions/auth'
+import { fetchUser, logout } from '../../actions/auth'
 import { fetchTwigs } from '../../actions/twigs'
 import {List, Icon, Button, Image } from 'semantic-ui-react'
 
@@ -19,8 +19,13 @@ class Profile extends Component{
         this.props.history.push('/create')
     }
 
+    logOut = () => {
+        this.props.logout()
+        this.props.history.push("/")
+    }
+
     componentWillMount(){
-        this.props.fetchUser()
+        // this.props.fetchUser()
         this.props.fetchTwigs()
     }
 
@@ -45,7 +50,7 @@ class Profile extends Component{
                             ? ""
                             : <List selection verticalAlign={"middle"}>
                                 {twigs.map((twig, index) => (
-                                    <List.Item key={index}>
+                                    <List.Item className="twigs" key={index}>
                                         <Image avatar src={logo} />
                                         <List.Content>
                                             {twig.twig_name}
@@ -67,7 +72,7 @@ class Profile extends Component{
                     </UserSide>
 
                     <UserSide>
-                        <Button basic size="tiny">
+                        <Button basic size="tiny" onClick={this.logOut}>
                             <Icon name={"sign out"} color='orange' />Log out
                         </Button>
                     </UserSide>
@@ -81,4 +86,4 @@ const mapStateToProps = state => ({
     twigs: state.twigs.twigs
 })
 
-export default connect(mapStateToProps, { fetchUser, fetchTwigs })(Profile)
+export default connect(mapStateToProps, { fetchUser, fetchTwigs, logout })(Profile)

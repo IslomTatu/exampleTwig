@@ -9,6 +9,10 @@ const style = {
     "height": 250
 }
 
+const refCallback = node => {
+
+}
+
 const ProfileSide = ({ onClick, username, goMyPage }) => (
     <div id="profile-side" style={style}>
         <List selection verticalAlign='middle'>
@@ -19,12 +23,13 @@ const ProfileSide = ({ onClick, username, goMyPage }) => (
                 </List.Header>
             </List.Item>
             <List.Item onClick={goMyPage}>
-                <Link style={{"display": "flex"}}
-                    to={`/profile/${username}`}
-                >
+                {/*<Link  style={{"display": "flex"}}*/}
+                       {/*innerRef={refCallback}*/}
+                    {/*to={`/profile/${username}`}*/}
+                {/*>*/}
                     <Icon name='home'/>
                     <List.Content>My Page</List.Content>
-                </Link>
+                {/*</Link>*/}
             </List.Item>
             <List.Item>
                 <Icon name='newspaper outline'/>

@@ -7,13 +7,12 @@ import ProfileSideContainer from '../containers/ProfileSide'
 
 
 
-
 import '../index.css'
 
-const Home = ({ user }) => (
+const Home = ({ user, history }) => (
         <div id='container-inner'>
             {   localStorage.twigJWT?
-                !!localStorage.twigJWT?<ProfileSideContainer/>: <LoginSide />
+                !!localStorage.twigJWT?<ProfileSideContainer history={history}/>: <LoginSide />
                 : <LoginSide />
             }
             <Main />

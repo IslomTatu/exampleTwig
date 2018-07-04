@@ -4,6 +4,7 @@ import thunk from 'redux-thunk'
 import createHistory from 'history/createBrowserHistory'
 import rootReducer from './reducers'
 import { composeWithDevTools } from 'redux-devtools-extension'
+import {fetchUser} from "./actions/auth";
 
 export const history = createHistory()
 
@@ -33,5 +34,7 @@ const store = createStore(
     initialState,
     enhancer
 )
+
+store.dispatch(fetchUser())
 
 export default store

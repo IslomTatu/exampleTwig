@@ -8,7 +8,7 @@ import App from './App'
 
 render(
         <Provider store={store}>
-            <Router>
+            <Router hisroty={history}>
                 <App />
             </Router>
         </Provider>

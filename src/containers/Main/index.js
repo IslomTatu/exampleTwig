@@ -26,7 +26,7 @@ class Main extends Component{
     componentDidMount(){
 
         this.props.fetchPosts()
-        this.props.fetchUser()
+        // this.props.fetchUser()
         setTimeout(()=>{
             this.setState({
                 items: this.props.news.slice(0,3)

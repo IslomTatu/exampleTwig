@@ -20,3 +20,12 @@
     width: 25%;
 }
 
+#main-user .twigs img {
+    border: 1px solid grey;
+    padding: 4px;
+    float: left;
+}
+#main-user .twigs .content {
+    padding: 5px;
+    float: left;
+}

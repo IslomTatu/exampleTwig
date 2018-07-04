@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { logout } from '../../actions/auth'
 import ProfileSide from '../../components/Profile/ProfileSide'
 
+import { history } from 'history'
+
 class ProfileSideContainer extends Component{
 
 
@@ -10,13 +12,17 @@ class ProfileSideContainer extends Component{
         this.props.logout()
     }
 
+    goMyPage = () => {
+        this.props.history.push(`/profile/${this.props.user}`)
+    }
+
     render(){
-        const { user } = this.props
+        const { user, history } = this.props
         return(
             <ProfileSide
                 onClick={this.onClick}
                 username={user}
-
+                goMyPage={this.goMyPage}
             />
         )
     }

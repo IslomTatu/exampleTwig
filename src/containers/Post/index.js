@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import {getPostId, getComments, sendComment} from "../../actions/postAction";
+import {getPostId, getComments, sendComment} from "../../actions/postAction"
+
+import { fetchUser } from "../../actions/auth"
 
 import Moment from 'react-moment'
-import { Button, Icon, Form, Comment, Header } from 'semantic-ui-react'
+import { Button, Icon, Form, Comment, Header, Message } from 'semantic-ui-react'
 
 // import Button from '../../components/Button'
 import  FaAngleUp from 'react-icons/lib/fa/angle-up'
@@ -17,32 +19,41 @@ class Post extends Component{
     state = {
         data:{
           post_id: 0,
-          user : {
-              username: ""
-          },
           comment_text: "",
           parent_comment: 0
         },
         loading: false,
-        errors: []
+        errors: [],
+        error: {}
     }
 
     componentWillMount() {
         const postID = this.props.match.url.slice(-3)
         this.props.getPostId(this.props.match.url.slice(-3))
         this.props.getComments(this.props.match.url.slice(-3))
+        // this.props.fetchUser()
         console.log(this.props.match)
 
         this.setState({
             data: {
                 ...this.state.data,
-                post_id: postID,
-                user: {
-                    ...this.state.data.user,
-                    username: "islom"
-                }
+                post_id: postID
             }
         })
+    }
+
+    replyComment = (parent_id, user) => {
+        this.setState({
+            ...this.state,
+            data: {
+                ...this.state.data,
+                parent_comment: parent_id
+            }
+        })
+
+        document.getElementById("commentArea").focus()
+        document.getElementById("commentArea").value = `@${user} `
+
     }
 
 
@@ -53,12 +64,13 @@ class Post extends Component{
                 comment_text: e.target.value,
             }
         })
-
-        console.log(this.state)
     }
 
     onSubmit = (e) => {
         e.preventDefault()
+        this.setState({
+            errors: []
+        })
         if(Object.keys(this.state.errors).length === 0) {
 
             this.setState({ loading : true })
@@ -66,11 +78,29 @@ class Post extends Component{
         this.props
             .sendComment(this.state.data)
             .then(() => {
-                window.reload(true)
+                document.getElementById("commentArea").value = ""
+                window.location.reload(true)
             })
-            // .catch(err => {
-            //     console.log("error in comment", err)
-            // })
+            .catch(err => {
+                if (err.response.status === 401){
+                    this.setState({
+                        error: err.response.data,
+                        loading: false
+                    })
+                }
+                else if (err.response.status === 400){
+                    this.setState({
+                        errors: err.response.data.errors,
+                        loading: false
+                    })
+                }
+                else {
+                    console.log("Something is wrong with INTERNET", err)
+                    this.setState({
+                        loading: false
+                    })
+                }
+            })
 
 
     }
@@ -86,6 +116,8 @@ class Post extends Component{
         const comments = this.props.comments.filter(parent => parent.parent_comment === 0)
         const reComments = this.props.comments.filter(parent => parent.parent_comment !== 0)
         const {parent_comment} = reComments
+
+        const { errors, error, loading } = this.state
         return (
             <div id='container-post'>
                 <div id='main-post'>
@@ -133,7 +165,7 @@ class Post extends Component{
                                             <p>{comment.comment_text}</p>
                                         </Comment.Text>
                                         <Comment.Actions>
-                                            <a>Reply</a>
+                                            <a onClick={() => this.replyComment(comment.id, comment.user.username)}>Reply</a>
                                         </Comment.Actions>
                                     </Comment.Content>
 
@@ -165,8 +197,12 @@ class Post extends Component{
 
 
                             )}
-                            <Form reply onSubmit={this.onSubmit}>
-                                <Form.TextArea onChange={this.onChange} />
+                            {error.detail ? <Message color="red">Please login or signup first</Message>
+                                :""
+                            }
+                            <Form reply onSubmit={this.onSubmit} loading={loading}>
+                                <Form.TextArea id="commentArea" onChange={this.onChange} />
+                                <span style={{"display":errors.length?"block":"none"}}>{errors.length? errors[0].message:""}</span>
                                 <Button content='Add Reply' labelPosition='left' icon='edit' primary />
                             </Form>
                         </Comment.Group>
@@ -217,6 +253,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
     getPostId: id => getPostId(id),
     getComments: id => getComments(id),
     sendComment,
+    fetchUser
 },dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Post)

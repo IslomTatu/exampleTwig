@@ -32,16 +32,17 @@ export const userLogIn = payload => ({
     payload
 })
 
-export const confirmUser = token => dispatch =>
-    api.user.confirm(token).then((user) => {
-        if(!!localStorage.twigJWT){
-            delete localStorage.twigJWT
-        }
-        localStorage.twigJWT = token
-        setAuthorizationHeader(token)
+export const confirmUser = token => dispatch => {
+    if (!!localStorage.twigJWT) {
+        delete localStorage.twigJWT
+    }
+    localStorage.twigJWT = token
+    setAuthorizationHeader(token)
+    api.user.confirm().then((user) => {
         dispatch(userLogIn(user))
 
     })
+}
 
 export const login = user => dispatch =>
     api.user.login(user).then(token => {
@@ -62,6 +63,7 @@ export const logout = () => dispatch => {
 export const fetchUser = () => dispatch => {
     if(!!localStorage.twigJWT){
         let token = localStorage.twigJWT
+        setAuthorizationHeader(token)
         dispatch(confirmUser(token))
     }
     else{

@@ -55,7 +55,7 @@ class LoginSide extends Component{
 
 
     render(){
-        const { errors } = this.state
+        const { errors, loading } = this.state
         const errUsername = errors.find(field => field.field === 'username')
         const errPassword = errors.find(field => field.field === 'password')
         const errNone = errors.find(field => field.field === 'None')
@@ -67,7 +67,7 @@ class LoginSide extends Component{
                         {!errNone ? ""
                             :<Message color="red">{errNone.message}</Message>
                         }
-                        <Form onSubmit={this.onSubmit}>
+                        <Form onSubmit={this.onSubmit} loading={loading}>
                             <div className='input-group'>
                                 <label htmlFor='name'>Login </label>
                                 <br/>
