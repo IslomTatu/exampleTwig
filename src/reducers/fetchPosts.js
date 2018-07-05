@@ -27,7 +27,7 @@ const postReducer = (state = initialState, action) => {
                 item: action.data
             }
         case POSTS_FETCHING:
-            console.log("fetchiiiiiiiing")
+            console.log("fetching")
             return {
                 ...state,
                 loading: true

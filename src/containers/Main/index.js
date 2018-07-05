@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { fetchPosts, getPostId, likePost, unlikePost } from "../../actions/postAction"
+import { fetchUser } from "../../actions/auth"
 import InfiniteScroll from 'react-infinite-scroll-component'
 import Moment from 'react-moment'
-import { fetchPosts, getPostId, likePost, unlikePost } from "../../actions/postAction";
-import { fetchUser } from "../../actions/auth";
 import { bindActionCreators } from 'redux'
-
 import { Dimmer, Loader } from 'semantic-ui-react'
+import { Instagram } from 'react-content-loader'
 import Icon from 'react-icons-kit'
 import {comment} from 'react-icons-kit/fa/comment'
 import {share} from 'react-icons-kit/fa/share'
@@ -24,7 +24,8 @@ class Main extends Component{
         begin: 3,
         end: 6,
         errors: [],
-        loading: false
+        loading: false,
+        array: [1,2,3]
     }
     componentWillMount(){
 
@@ -35,7 +36,7 @@ class Main extends Component{
             this.setState({
                 items: this.props.news.slice(0,3)
             })
-        },1500)
+        },150)
 
     }
     fetchMoreData = () => {
@@ -49,65 +50,68 @@ class Main extends Component{
                 begin: begin + 3,
                 end: end + 3
             });
-        }, 500)
+        }, 1)
 
     }
 
 
     render(){
-
+        const { array } = this.state
         const { loading } = this.props
         return (
             <div id="main">
+
+                {loading ? array.map(arr => <Instagram/>) : ""}
                 <InfiniteScroll
                     dataLength={this.state.items.length}
                     next={this.fetchMoreData}
                     hasMore={true}
                 >
-                    <Dimmer active={loading}>
-                        <Loader />
-                    </Dimmer>
                 {this.state.items.map((post, index) => (
                         <div key={index} className="posts-container" id={"post__"+index} onClick={()=>this.props.getPostId(post.id)}>
-                            <div className='post-header'>
-                                <h3><Link to={"post/test_"+post.id} >{post.title}</Link></h3>
-                                <div className='user-data'>
-                                    <span><Moment  fromNow>{post.date}</Moment></span>
-                                    <p>author <a href="">u/{post.user.username}</a></p>
-                                    <p>from <a href="">t/{post.twig.twig_name}</a></p>
-                                </div>
-                            </div>
 
-                            <div className='post-body'>
-                                {post.media_type==='image'
-                                    ? <img width='100%' src={post.media[0]} alt=""/>
-                                    : <video width="100%" height="400" src={post.media[0]} frameBorder="0" controls allowFullScreen></video>
-                                }
-                            </div>
-                            <div className="post-footer">
-                                <div className="footer-left">
-                                    <div className="footer-comment" >
-                                        <Icon icon={comment} />
-                                    </div>
-                                    <div className="footer-share">
-                                        <Icon icon={share} />
+                            <div>
+                                <div className='post-header'>
+                                    <h3><Link to={"post/test_"+post.id} >{post.title}</Link></h3>
+                                    <div className='user-data'>
+                                        <span><Moment  fromNow>{post.date}</Moment></span>
+                                        <p>author <a href="">u/{post.user.username}</a></p>
+                                        <p>from <a href="">t/{post.twig.twig_name}</a></p>
                                     </div>
                                 </div>
 
-                                <div className="footer-right">
-                                    <div className="unlike">
-                                        <p></p>
-                                        <Icon  onClick={()=> this.props.unlikePost(post.id)} icon={arrowDown} />
+                                <div className='post-body'>
+                                    {post.media_type==='image'
+                                        ? <img width='100%' src={post.media[0]} alt=""/>
+                                        : <video width="100%" height="400" src={post.media[0]} frameBorder="0" controls allowFullScreen></video>
+                                    }
+                                </div>
+                                <div className="post-footer">
+                                    <div className="footer-left">
+                                        <div className="footer-comment" >
+                                            <Icon icon={comment} />
+                                        </div>
+                                        <div className="footer-share">
+                                            <Icon icon={share} />
+                                        </div>
                                     </div>
-                                    <div className="count">
 
-                                    </div>
-                                    <div className="like" >
-                                        <Icon  onClick={()=> this.props.likePost(post.id)} icon={arrowUp} />
-                                        <p></p>
+                                    <div className="footer-right">
+                                        <div className="unlike">
+                                            <p></p>
+                                            <Icon  onClick={()=> this.props.unlikePost(post.id)} icon={arrowDown} />
+                                        </div>
+                                        <div className="count">
+
+                                        </div>
+                                        <div className="like" >
+                                            <Icon  onClick={()=> this.props.likePost(post.id)} icon={arrowUp} />
+                                            <p></p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
 
                 ) )}

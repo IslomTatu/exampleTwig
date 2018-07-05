@@ -12,7 +12,6 @@ import { POSTS_FETCHED,
 } from "../constants";
 import api from '../api'
 
-import axios from 'axios'
 
 const postsFetched = payload => ({
     type: POSTS_FETCHED,
