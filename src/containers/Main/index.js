@@ -8,6 +8,7 @@ import Moment from 'react-moment'
 import { bindActionCreators } from 'redux'
 import { Dimmer, Loader } from 'semantic-ui-react'
 import { Instagram } from 'react-content-loader'
+import Skeleton from 'react-loading-skeleton'
 import Icon from 'react-icons-kit'
 import {comment} from 'react-icons-kit/fa/comment'
 import {share} from 'react-icons-kit/fa/share'
@@ -27,18 +28,7 @@ class Main extends Component{
         loading: false,
         array: [1,2,3]
     }
-    componentWillMount(){
 
-        this.props
-            .fetchPosts()
-        // this.props.fetchUser()
-        setTimeout(()=>{
-            this.setState({
-                items: this.props.news.slice(0,3)
-            })
-        },150)
-
-    }
     fetchMoreData = () => {
 
         let begin = this.state.begin
@@ -54,14 +44,13 @@ class Main extends Component{
 
     }
 
-
     render(){
         const { array } = this.state
         const { loading } = this.props
         return (
             <div id="main">
 
-                {loading ? array.map(arr => <Instagram/>) : ""}
+                {loading ? array.map((arr, index) => <Instagram key={index}/>) : ""}
                 <InfiniteScroll
                     dataLength={this.state.items.length}
                     next={this.fetchMoreData}
@@ -82,8 +71,8 @@ class Main extends Component{
 
                                 <div className='post-body'>
                                     {post.media_type==='image'
-                                        ? <img width='100%' src={post.media[0]} alt=""/>
-                                        : <video width="100%" height="400" src={post.media[0]} frameBorder="0" controls allowFullScreen></video>
+                                        ? <img width='100%' src={post.media[0]} alt=""/> || <Skeleton/>
+                                        : <video width="100%" height="400" src={post.media[0]} frameBorder="0" controls allowFullScreen></video> || <Skeleton/>
                                     }
                                 </div>
                                 <div className="post-footer">
@@ -98,7 +87,7 @@ class Main extends Component{
 
                                     <div className="footer-right">
                                         <div className="unlike">
-                                            <p></p>
+
                                             <Icon  onClick={()=> this.props.unlikePost(post.id)} icon={arrowDown} />
                                         </div>
                                         <div className="count">
@@ -106,7 +95,7 @@ class Main extends Component{
                                         </div>
                                         <div className="like" >
                                             <Icon  onClick={()=> this.props.likePost(post.id)} icon={arrowUp} />
-                                            <p></p>
+
                                         </div>
                                     </div>
                                 </div>
@@ -118,6 +107,19 @@ class Main extends Component{
                 </InfiniteScroll>
             </div>
         )
+    }
+
+    componentDidMount(){
+
+        this.props
+            .fetchPosts()
+        // this.props.fetchUser()
+        setTimeout(()=>{
+            this.setState({
+                items: this.props.news.slice(0,3)
+            })
+        },100)
+
     }
 
 }

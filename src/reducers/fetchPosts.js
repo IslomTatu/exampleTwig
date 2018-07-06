@@ -14,10 +14,22 @@ const initialState = {
 
 const postReducer = (state = initialState, action) => {
     switch(action.type) {
+        case POSTS_FETCHING:
+            console.log("fetching")
+            return {
+                ...state,
+                loading: true
+            }
         case POSTS_FETCHED:
             return {
                 ...state,
                 items: action.payload,
+                loading: false
+            }
+        case POSTS_ERROR:
+            return{
+                ...state,
+                error: "Something wrong with your connection or API",
                 loading: false
             }
 
@@ -25,18 +37,6 @@ const postReducer = (state = initialState, action) => {
             return {
                 ...state,
                 item: action.data
-            }
-        case POSTS_FETCHING:
-            console.log("fetching")
-            return {
-                ...state,
-                loading: true
-            }
-        case POSTS_ERROR:
-            return{
-                ...state,
-                error: "Something wrong with your connection or API",
-                loading: false
             }
 
         case COMMENTS_FETCHED:
