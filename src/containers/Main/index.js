@@ -6,9 +6,9 @@ import Moment from 'react-moment'
 import { fetchPosts, getPostId, likePost, unlikePost } from "../../actions/postAction";
 import { fetchUser } from "../../actions/auth";
 import { bindActionCreators } from 'redux'
-
+import { Dimmer, Loader } from 'semantic-ui-react'
 import { BrowserView, MobileView } from 'react-device-detect'
-
+import { Instagram } from 'react-content-loader'
 import Icon from 'react-icons-kit'
 import {comment} from 'react-icons-kit/fa/comment'
 import {share} from 'react-icons-kit/fa/share'
@@ -23,7 +23,8 @@ class Main extends Component{
     state = {
         items: [],
         begin: 3,
-        end: 6
+        end: 6,
+        array: [1,2,3]
     }
     componentDidMount(){
 
@@ -53,10 +54,13 @@ class Main extends Component{
 
 
     render(){
+        const { loading } = this.props
+        const { array } = this.state
 
         return (
             <div id="main">
                 <BrowserView>
+                    {loading ? array.map((arr, index) => <Instagram key={index}/>) : ""}
                     <InfiniteScroll
                         dataLength={this.state.items.length}
                         next={this.fetchMoreData}
@@ -119,7 +123,8 @@ class Main extends Component{
 
 
 const mapStateToProps = state => ({
-    news: state.news.items
+    news: state.news.items,
+    loading: state.news.loading
 
 })
 

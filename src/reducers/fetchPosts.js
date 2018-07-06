@@ -54,7 +54,6 @@ const postReducer = (state = initialState, action) => {
                 )
             }
         case UNLIKE_POSTS:
-
             return {
                 ...state,
                 items: state.items.map(item => (item.id === action.id)
