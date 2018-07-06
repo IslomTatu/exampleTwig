@@ -34,7 +34,7 @@ class Main extends Component{
             this.setState({
                 items: this.props.news.slice(0,3)
             })
-        },1500)
+        },150)
 
     }
     fetchMoreData = () => {
