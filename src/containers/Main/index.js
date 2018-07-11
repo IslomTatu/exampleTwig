@@ -123,7 +123,7 @@ class Main extends Component{
 
             setTimeout(()=>{
                 this.setState({
-                    items: nextProps.news.slice(0,3)
+                    items: nextProps.news
                 })
             },150)
         }
