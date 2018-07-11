@@ -41,7 +41,11 @@ export default {
                 lang: data.lang
             })
             .then(res => res.data),
-        fetchAll: () => axios.get(`${url}account/twigs`)
+        fetchUserAll: () => axios.get(`${url}account/twigs`, {})
+            .then(res => res.data.results),
+        fetchAll: () => axios.get(`${url}twigs`, {})
+            .then(res => res.data.results),
+        fetchPosts: twigName => axios.get(`${url}twigs/${twigName}/posts`)
             .then(res => res.data.results)
     }
 }

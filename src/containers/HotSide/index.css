@@ -1,8 +1,12 @@
 #hot-side{
     border: 1px solid grey;
+    background-color: white;
+    padding: 20px 0 20px 50px;
     width: 25%;
-    height: 1000px;
     margin: 10px;
     position: sticky;
     top: 55px;
+}
+#hot-side .item{
+    cursor: pointer;
 }

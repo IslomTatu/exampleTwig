@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchUser, logout } from '../../actions/auth'
-import { fetchTwigs } from '../../actions/twigs'
+import { fetchUserTwigs } from '../../actions/twigs'
 import {List, Icon, Button, Image } from 'semantic-ui-react'
 
 //components
@@ -26,7 +26,7 @@ class Profile extends Component{
 
     componentWillMount(){
         // this.props.fetchUser()
-        this.props.fetchTwigs()
+        this.props.fetchUserTwigs()
     }
 
 
@@ -86,4 +86,4 @@ const mapStateToProps = state => ({
     twigs: state.twigs.twigs
 })
 
-export default connect(mapStateToProps, { fetchUser, fetchTwigs, logout })(Profile)
+export default connect(mapStateToProps, { fetchUser, fetchUserTwigs, logout })(Profile)

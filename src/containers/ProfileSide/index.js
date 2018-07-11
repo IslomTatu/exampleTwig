@@ -13,7 +13,7 @@ class ProfileSideContainer extends Component{
     }
 
     goMyPage = () => {
-        this.props.history.push(`/profile/${this.props.user}`)
+        this.props.history.push(`/user/${this.props.user}`)
     }
 
     render(){

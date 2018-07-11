@@ -29,6 +29,7 @@ class Main extends Component{
     componentDidMount(){
 
         this.props.fetchPosts()
+
         // this.props.fetchUser()
         setTimeout(()=>{
             this.setState({
@@ -59,7 +60,7 @@ class Main extends Component{
 
         return (
             <div id="main">
-                <BrowserView>
+
                     {loading ? array.map((arr, index) => <Instagram key={index}/>) : ""}
                     <InfiniteScroll
                         dataLength={this.state.items.length}
@@ -111,12 +112,21 @@ class Main extends Component{
 
                         ) )}
                     </InfiniteScroll>
-                </BrowserView>
-                <MobileView>
-                    <h1>Mobile? bye!</h1>
-                </MobileView>
+
             </div>
         )
+    }
+    componentWillUpdate(nextProps) {
+        if( nextProps.news !== this.props.news){
+            console.log("nextProps.news: ", nextProps.news)
+            console.log("this.props.news: ", this.props.news)
+
+            setTimeout(()=>{
+                this.setState({
+                    items: nextProps.news.slice(0,3)
+                })
+            },150)
+        }
     }
 
 }

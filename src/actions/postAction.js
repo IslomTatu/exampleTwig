@@ -13,14 +13,15 @@ import { POSTS_FETCHED,
 import api from '../api'
 
 
+
 const postsFetched = payload => ({
     type: POSTS_FETCHED,
     payload
 })
 
-const postFetched = data => ({
+const postFetched = payload => ({
     type: POST_FETCHED,
-    data
+    payload
 })
 
 
@@ -32,6 +33,7 @@ const postsError = () => ({
     type: POSTS_ERROR
 })
 export const  fetchPosts = () => dispatch  => {
+    console.log("yannnnaaaaaaa")
     dispatch(postsFetching())
     api.post
         .fetchAll()
@@ -53,17 +55,6 @@ export const getPostId = id => dispatch => {
 }
 
 
-
-export const likePost = (id) => ({
-    type: LIKE_POSTS,
-    id
-})
-
-export const unlikePost = (id) => ({
-    type: UNLIKE_POSTS,
-    id
-})
-
 //comments Action
 
 export const commentsFetched = payload => ({
@@ -78,10 +69,6 @@ export const commentError = err => ({
 })
 
 export const getComments = id => dispatch => {
-    let authToken = 'token'
-    if(!!localStorage.twigJWT){
-        authToken = localStorage.twigJWT
-    }
     api.post
         .fetchComments(id)
         .then(data => {
@@ -92,6 +79,7 @@ export const getComments = id => dispatch => {
         })
 }
 
+//********************************************
 export const commentReady = payload => ({
     type: COMMENT_READY,
     payload
@@ -103,3 +91,16 @@ export const sendComment = (data) => dispatch =>
             dispatch(commentReady(data))
     })
 
+//***********************************************
+
+//********************************************
+export const likePost = (id) => ({
+    type: LIKE_POSTS,
+    id
+})
+
+export const unlikePost = (id) => ({
+    type: UNLIKE_POSTS,
+    id
+})
+//********************************************

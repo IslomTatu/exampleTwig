@@ -6,27 +6,34 @@ import { USER_LOGGED_IN,
 import api from '../api'
 import setAuthorizationHeader from "../utils/setAuthorizationHeader";
 
+
+//****************************************
 export const userSignUp = () => ({
     type: USER_SIGN_UP
 })
-
-export const activateCode =  (payload) => ({
-    type: USER_ACTIVATE_CODE,
-    payload
-})
-
 
 export const signup = credentials => dispatch =>
     api.user.singup(credentials).then(token => {
         localStorage.twigJWT = token
         dispatch(userSignUp())
     })
+//**************************************************
+
+
+//*************************************************
+export const activateCode =  (payload) => ({
+    type: USER_ACTIVATE_CODE,
+    payload
+})
 
 export const active = code => dispatch =>
     api.user.activate(code).then(user => {
         dispatch(activateCode(user))
     })
+//************************************************
 
+
+//************************************************
 export const userLogIn = payload => ({
     type: USER_LOGGED_IN,
     payload
@@ -49,7 +56,10 @@ export const login = user => dispatch =>
         dispatch(confirmUser(token))
     })
 
+//*********************************************
 
+
+//*******************************************
 export const userLogOut = () => ({
     type: USER_LOGGED_OUT
 })
@@ -59,7 +69,10 @@ export const logout = () => dispatch => {
     setAuthorizationHeader()
     dispatch(userLogOut())
 }
+//**************************************************
 
+
+//****************************************************
 export const fetchUser = () => dispatch => {
     if(!!localStorage.twigJWT){
         let token = localStorage.twigJWT

@@ -27,7 +27,7 @@ class App extends Component{
                     <Route path='/post/:id' component={Post} />
                     <Route path='/user/register' component={Register} />
                     <Route path='/setting/email' component={Activation} />
-                    <Route path='/profile/:user' component={Profile} />
+                    <Route path='/user/:user' component={Profile} />
                     <Route path='/create' component={AddTwig}/>
                 </div>
 

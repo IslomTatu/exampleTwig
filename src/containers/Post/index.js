@@ -79,7 +79,10 @@ class Post extends Component{
             .sendComment(this.state.data)
             .then(() => {
                 document.getElementById("commentArea").value = ""
-                window.location.reload(true)
+                this.props.getComments(this.props.match.url.slice(-3))
+                this.setState({
+                    loading: false
+                })
             })
             .catch(err => {
                 if (err.response.status === 401){
